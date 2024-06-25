@@ -4,20 +4,48 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  useNavigate,
 } from "@remix-run/react";
 import "./tailwind.css";
+import { NextUIProvider } from "@nextui-org/react";
+import clsx from "clsx";
+import {
+  PreventFlashOnWrongTheme,
+  ThemeProvider,
+  useTheme,
+} from "remix-themes";
+import { themeSessionResolver } from "./sessions.server";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import NavBar from "./components/navbar";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <NextUIProvider navigate={navigate}>
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="light"
+          >
+            <NavBar></NavBar>
+            {children}
+          </NextThemesProvider>
+        </NextUIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
