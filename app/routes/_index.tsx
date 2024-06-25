@@ -3,7 +3,7 @@ import NavBar from "~/components/navbar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "RB-Home" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

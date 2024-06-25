@@ -40,16 +40,16 @@ body {
 .navitem {
   --c: green;
   color: var(--c);
-  font-size: 12px;
+  font-size: 14px;
   border: 0.2em solid var(--c);
   border-radius: 0.16em;
-  width: 8rem;
+  width: 10rem;
   height: 2.5rem;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-align: center;
-  line-height: 1em;
+  line-height:1px;
   position: relative;
   overflow: hidden;
   z-index: 1;

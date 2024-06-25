@@ -11,11 +11,11 @@ import { useState } from "react";
 import ThemeToggler from "./themeSwitch";
 import { NavLink } from "@remix-run/react";
 import {
-  IconHome,
-  IconArticle,
-  IconAddressBook,
-  IconLayoutGrid,
+  IconHomeFilled,
   IconApiApp,
+  IconLayoutGridFilled,
+  IconDialpadFilled,
+  IconArticleFilled,
 } from "@tabler/icons-react";
 
 export default function NavBar() {
@@ -57,7 +57,7 @@ export default function NavBar() {
             to={"/"}
             className="navitem flex justify-center items-center gap-1 dark:text-white "
           >
-            <IconHome stroke={2}></IconHome>
+            <IconHomeFilled></IconHomeFilled>
             <p>
               {" "}
               Home
@@ -73,7 +73,7 @@ export default function NavBar() {
             to={"/blogs"}
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
-            <IconArticle stroke={2}></IconArticle>
+            <IconArticleFilled />
             <p>
               {" "}
               Blogs
@@ -90,7 +90,7 @@ export default function NavBar() {
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
             {" "}
-            <IconAddressBook stroke={2}></IconAddressBook>
+            <IconDialpadFilled />
             <p>
               {" "}
               Contact
@@ -106,7 +106,7 @@ export default function NavBar() {
             to={"/about"}
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
-            <IconLayoutGrid stroke={2}></IconLayoutGrid>{" "}
+            <IconLayoutGridFilled></IconLayoutGridFilled>
             <p>
               {" "}
               About
@@ -130,7 +130,7 @@ export default function NavBar() {
             to={"/"}
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
-            <IconHome stroke={2}></IconHome>
+            <IconHomeFilled></IconHomeFilled>
             <p>
               {" "}
               Home
@@ -147,7 +147,7 @@ export default function NavBar() {
             to={"/blogs"}
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
-            <IconArticle stroke={2}></IconArticle>
+            <IconArticleFilled></IconArticleFilled>
             <p>
               {" "}
               Blogs
@@ -165,7 +165,7 @@ export default function NavBar() {
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
             {" "}
-            <IconAddressBook stroke={2}></IconAddressBook>
+            <IconDialpadFilled></IconDialpadFilled>
             <p>
               {" "}
               Contact
@@ -182,7 +182,7 @@ export default function NavBar() {
             to={"/about"}
             className="navitem flex justify-center items-center gap-1 dark:text-white"
           >
-            <IconLayoutGrid stroke={2}></IconLayoutGrid>{" "}
+            <IconLayoutGridFilled></IconLayoutGridFilled>
             <p>
               {" "}
               About
