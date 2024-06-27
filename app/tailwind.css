@@ -5,7 +5,8 @@
 
 /* for all */
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
 }
 
 /* dark theme */
@@ -19,7 +20,7 @@ body {
 
 /* light theme */
 :root[class~="light"] {
-  background-color: rgb(255, 252, 252);
+  background-color: #ebeaee;
   color: rgb(2, 20, 2);
 }
 
@@ -49,7 +50,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-align: center;
-  line-height:1px;
+  line-height: 1px;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -59,12 +60,12 @@ body {
 
 .navitem p span {
   position: absolute;
-  width: 25%;
-  height: 100%;
+  width: 30%;
+  height: 136%;
   background-color: var(--c);
   transform: translateY(150%);
   border-radius: 50%;
-  left: calc((var(--n) - 1) * 25%);
+  left: calc((var(--n) - 1) * 27%);
   transition: 0.4s;
   transition-delay: calc((var(--n) - 1) * 0.1s);
   z-index: -1;

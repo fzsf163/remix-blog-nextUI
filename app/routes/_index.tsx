@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import NavBar from "~/components/navbar";
+
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,5 +9,16 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+    </div>
+  );
 }

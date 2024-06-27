@@ -18,7 +18,8 @@ import {
 import { themeSessionResolver } from "./sessions.server";
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import NavBar from "./components/navbar";
+
+import NavTop from "./components/navtop";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             attribute="class"
             defaultTheme="light"
           >
-            <NavBar></NavBar>
+            <NavTop></NavTop>
             {children}
           </NextThemesProvider>
         </NextUIProvider>

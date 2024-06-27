@@ -1,3 +1,3 @@
 export default function RouteComponent() {
-  return <div>About route</div>;
+  return <div> about page</div>;
 }

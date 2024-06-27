@@ -1,0 +1,108 @@
+/* nav {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+nav .link {
+  position: relative;
+  padding: 5px 10px;
+  margin: 0px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+nav .marker {
+  left: 0;
+  position: absolute;
+  height: 4px;
+  width: 0;
+  background: green;
+  bottom: -8px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+nav .active {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+} */
+
+/* togglemenu */
+
+.menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+.line {
+  fill: none;
+  stroke: green;
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+:root[class~="dark"] {
+  .line {
+    stroke: white;
+  }
+}
+
+.line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+/* side nav */
+
+.sideNav {
+  display: flex;
+}
+
+aside {
+  background-color: #c3badd;
+  /* background-color: #6b5d96; */
+  width: 20rem;
+  height: 100vh;
+}
+
+.container {
+  margin: 4.5rem 1.4rem;
+}
+
+.container a {
+  color: #090a0a;
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 600;
+  display: block;
+  margin: 20px;
+}
+.sideMenuLink .active {
+  color: white;
+}

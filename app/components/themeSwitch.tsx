@@ -91,7 +91,7 @@ const ThemeSwitch = (props: SwitchProps) => {
             class: [
               "w-8 h-8",
               "flex items-center justify-center",
-              "light  rounded-sm light:bg-blue-500 light:text-white  hover:bg-default-200 dark:bg-default-800  focus:bg-current",
+              "light  rounded-md light:bg-blue-500 light:text-white  hover:bg-default-200 dark:bg-default-800  focus:bg-current",
             ],
           })}
         >
