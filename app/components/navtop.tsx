@@ -15,8 +15,8 @@ import NavItems from "./mainNav";
 
 const links = [
   { name: "Home", to: "/", id: 1 },
-  { name: "About", to: "about", id: 2 },
-  { name: "Blogs", to: "blogs", id: 3 },
+  { name: "Blogs", to: "blogs", id: 2 },
+  { name: "About", to: "about", id: 3 },
   { name: "Contact", to: "contact", id: 4 },
 ];
 
