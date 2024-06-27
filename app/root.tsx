@@ -20,6 +20,7 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 import NavTop from "./components/navtop";
+import ToTop from "./utils/scrolltotop";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <NavTop></NavTop>
             {children}
+            <ToTop></ToTop>
           </NextThemesProvider>
         </NextUIProvider>
         <ScrollRestoration />

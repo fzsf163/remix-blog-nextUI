@@ -1,3 +1,13 @@
 export default function RouteComponent() {
-  return <div>Blogs</div>;
+  return (
+    <div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+    </div>
+  );
 }
