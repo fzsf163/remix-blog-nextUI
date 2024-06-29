@@ -51,7 +51,7 @@ export default function Index() {
   // const SLIDE_COUNT = 10;
   // const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
-    <div>
+    <div className="mt-5">
       <EmblaCarousel
         slides={slider_images}
         options={OPTIONS}
