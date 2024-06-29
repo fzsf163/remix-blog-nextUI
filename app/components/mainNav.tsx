@@ -32,7 +32,6 @@ const navItems = [
 
 export default function NavItems() {
   let location = useLocation();
-  console.log("🚀 ~ NavItems ~ location:", location)
   let pathname = "" ?? "/";
 
   if (location.pathname) {
