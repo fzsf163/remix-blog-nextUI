@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-
-
+import EmblaCarousel from "~/components/slider/carousel";
+import { EmblaOptionsType } from "embla-carousel";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -8,17 +8,54 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const slider_images = [
+  {
+    img: "/public/slider-images/1.jpg",
+    header: "Turn your mind into a knowledge machine",
+    mainTag: "Sprituality",
+    description:
+      "Lettie Alexander brave name quickly happen opinion expression slipped minerals article shallow headed limited empty word finish because coast win foot nodded sky repeat serve local Lettie Alexander brave name quickly happen opinion expression slipped minerals article shallow headed limited empty word finish because coast win foot nodded sky repeat serve local",
+  },
+  {
+    img: "/public/slider-images/2.jpg",
+    header: "Write your tension down, and make solution",
+    mainTag: "Faith",
+    description:
+      "Francisco Suttonegg jet doctor use charge function specific opportunity force easy column speed voice direct calm human object good forth worried circus seeing baby badly",
+  },
+  {
+    img: "/public/slider-images/3.jpg",
+    header: "Sit down ,calm your minde, make yourself better",
+    mainTag: "Clamness",
+    description:
+      "Rosetta Petersas matter funny wheat real market company establish pencil send slowly feed conversation toy please require goes graph should enjoy machine home mysterious animal",
+  },
+  {
+    img: "/public/slider-images/4.jpg",
+    header: "A note to self, Betterment comes from paitence ",
+    mainTag: "Meditation",
+    description:
+      "Timothy Jonesvillage operation saw stronger easily cry idea everyone rubber further tide silent airplane fur vowel tone push laugh thousand dance cast mind claws hour",
+  },
+  {
+    img: "/public/slider-images/5.jpg",
+    header: "Bloom your mind in the womb of nature",
+    mainTag: "Nature",
+    description:
+      "Mayme Bishopteacher door fog we certainly useful struggle larger blue gently walk sentence rocky most travel fresh summer managed mail dark depend ahead aloud refer",
+  },
+];
+
 export default function Index() {
+  const OPTIONS: EmblaOptionsType = { loop: true, containScroll: false };
+  // const SLIDE_COUNT = 10;
+  // const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
     <div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
-      <div className="w-full h-[500px] bg-green-400">Home Page</div>
+      <EmblaCarousel
+        slides={slider_images}
+        options={OPTIONS}
+      ></EmblaCarousel>
     </div>
   );
 }

@@ -1,13 +1,7 @@
 import { useRef, useState } from "react";
 import "./navtop.css";
 import { NavLink } from "@remix-run/react";
-import {
-  IconHomeFilled,
-  IconApiApp,
-  IconLayoutGridFilled,
-  IconDialpadFilled,
-  IconArticleFilled,
-} from "@tabler/icons-react";
+import { IconApiApp } from "@tabler/icons-react";
 import ThemeToggler from "./themeSwitch";
 
 import { AnimatePresence, motion, useCycle } from "framer-motion";
@@ -64,7 +58,7 @@ export default function NavTop() {
   }
 
   return (
-    <div className="flex justify-between md:justify-evenly items-center  p-2 sticky top-0 backdrop-blur-sm light dark:bg-gradient-to-r light:bg-gradient-to-r light:from-white/20 light:via-white/40 light:to-white/20 dark:from-black/20 dark:via-black/40 dark:to-black/20">
+    <div className="flex justify-between md:justify-evenly items-center  p-2 sticky top-0 backdrop-blur-sm light dark:bg-gradient-to-r light:bg-gradient-to-r light:from-white/20 light:via-white/40 light:to-white/20 dark:from-black/20 dark:via-black/40 dark:to-black/20 z-50">
       <div className="md:hidden">
         <button
           className="menu"

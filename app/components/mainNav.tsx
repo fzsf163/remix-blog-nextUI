@@ -32,6 +32,7 @@ const navItems = [
 
 export default function NavItems() {
   let location = useLocation();
+  console.log("🚀 ~ NavItems ~ location:", location)
   let pathname = "" ?? "/";
 
   if (location.pathname) {
@@ -45,7 +46,6 @@ export default function NavItems() {
       <nav className="flex gap-2 relative justify-start w-full z-[100]  rounded-lg">
         {navItems.map((item, index) => {
           const isActive = item.path === pathname;
-
           return (
             <Link
               key={item.path}
