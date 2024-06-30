@@ -1,5 +1,5 @@
 .card {
-  width: 130px;
+  width: 190px;
   height: 190px;
   background: rgb(103, 225, 255);
   transition: all 0.4s;
@@ -8,10 +8,10 @@
   font-size: 30px;
   font-weight: 900;
 }
-:root[class~="dark"]{
-    .card{
-        background:rgba(255, 228, 196, 0.281) ;
-    }
+:root[class~="dark"] {
+  .card {
+    background: rgba(255, 228, 196, 0.281);
+  }
 }
 .card:hover {
   border-radius: 15px;
@@ -55,4 +55,29 @@
   height: 100%;
   font-size: 1rem;
   transform: rotate(0deg);
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .card {
+    width: 140px;
+    height: 140px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (min-width: 425px) and (max-width: 767px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (min-width: 375px) and (max-width: 424px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
 }

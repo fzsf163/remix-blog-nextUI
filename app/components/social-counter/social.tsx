@@ -12,18 +12,17 @@ const socials = [
 export default function Social() {
   // format the number
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
-  const numberToDisplay = formatter.format(40000000);
   return (
-    <div className="flex items-center justify-center gap-5">
+    <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4 2xl:gap-20">
       {socials.map((s, index) => {
         return (
           <div className="card" key={index}>
             <div className="first-content">
               <span>
                 {" "}
-                <div className="m-auto w-fit space-y-7 text-center">
+                <div className="m-auto w-fit text-center space-y-2 lg:space-y-5 xl:space-y-7">
                   <div
-                    className="m-auto size-20 rounded-lg"
+                    className="svg-logo m-auto rounded-lg size-8 md:size-10 lg:size-14 xl:size-20"
                     aria-label={s.name}
                   >
                     <img src={s.logo}></img>
@@ -42,22 +41,6 @@ export default function Social() {
           </div>
         );
       })}
-      {/* <div className="card">
-        <div className="first-content">
-          <span>
-            {" "}
-            <div className="m-auto w-fit text-center">
-              <div className="m-auto size-24 rounded-lg bg-black p-5">
-                <img src={x}></img>
-              </div>
-              <div className="p-4 text-2xl font-bold">{numberToDisplay}</div>
-            </div>
-          </span>
-        </div>
-        <div className="second-content">
-          <span>Follow</span>
-        </div>
-      </div> */}
     </div>
   );
 }
