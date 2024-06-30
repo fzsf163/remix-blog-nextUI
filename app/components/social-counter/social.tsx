@@ -22,7 +22,7 @@ export default function Social() {
                 {" "}
                 <div className="m-auto w-fit text-center space-y-2 lg:space-y-5 xl:space-y-7">
                   <div
-                    className="svg-logo m-auto rounded-lg size-8 md:size-10 lg:size-14 xl:size-20"
+                    className="svg-logo m-auto rounded-lg size-8 md:size-10 lg:size-14 2xl:size-20"
                     aria-label={s.name}
                   >
                     <img src={s.logo}></img>
