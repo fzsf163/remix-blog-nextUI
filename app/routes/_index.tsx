@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import EmblaCarousel from "~/components/slider/carousel";
 import { EmblaOptionsType } from "embla-carousel";
+import Social from "~/components/social-counter/social";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -10,28 +11,28 @@ export const meta: MetaFunction = () => {
 
 const slider_images = [
   {
-    img: "/public/slider-images/1.jpg",
+    img: "/slider-images/1.jpg",
     header: "Turn your mind into a knowledge machine",
     mainTag: "Sprituality",
     description:
       "Lettie Alexander brave name quickly happen opinion expression slipped minerals article shallow headed limited empty word finish because coast win foot nodded sky repeat serve local Lettie Alexander brave name quickly happen opinion expression slipped minerals article shallow headed limited empty word finish because coast win foot nodded sky repeat serve local",
   },
   {
-    img: "/public/slider-images/2.jpg",
+    img: "/slider-images/2.jpg",
     header: "Write your tension down, and make solution",
     mainTag: "Faith",
     description:
       "Francisco Suttonegg jet doctor use charge function specific opportunity force easy column speed voice direct calm human object good forth worried circus seeing baby badly",
   },
   {
-    img: "/public/slider-images/3.jpg",
+    img: "/slider-images/3.jpg",
     header: "Sit down ,calm your minde, make yourself better",
     mainTag: "Clamness",
     description:
       "Rosetta Petersas matter funny wheat real market company establish pencil send slowly feed conversation toy please require goes graph should enjoy machine home mysterious animal",
   },
   {
-    img: "/public/slider-images/4.jpg",
+    img: "/slider-images/4.jpg",
     header: "A note to self, Betterment comes from paitence ",
     mainTag: "Meditation",
     description:
@@ -51,11 +52,9 @@ export default function Index() {
   // const SLIDE_COUNT = 10;
   // const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
-    <div className="mt-5">
-      <EmblaCarousel
-        slides={slider_images}
-        options={OPTIONS}
-      ></EmblaCarousel>
+    <div className="mt-5 space-y-8">
+      <EmblaCarousel slides={slider_images} options={OPTIONS}></EmblaCarousel>
+      <Social></Social>
     </div>
   );
 }
