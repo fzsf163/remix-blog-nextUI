@@ -3,6 +3,7 @@ import EmblaCarousel from "~/components/slider/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 import Social from "~/components/social-counter/social";
 import MotivationalText from "~/components/motivation-text/motive";
+import FeaturedArticle from "~/components/feature-article/feature-article";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -51,14 +52,11 @@ const slider_images = [
 export default function Index() {
   const OPTIONS: EmblaOptionsType = { loop: true, containScroll: false };
   return (
-    <div className="mt-5 space-y-8 max-w-screen-3xl">
+    <div className="max-w-screen-3xl mt-5 space-y-8">
       <EmblaCarousel slides={slider_images} options={OPTIONS}></EmblaCarousel>
       <Social></Social>
       <MotivationalText></MotivationalText>
-      <br />
-      <br />
-      <br />
-      <br />
+      <FeaturedArticle></FeaturedArticle>
     </div>
   );
 }
