@@ -52,11 +52,14 @@ const slider_images = [
 export default function Index() {
   const OPTIONS: EmblaOptionsType = { loop: true, containScroll: false };
   return (
-    <div className="max-w-screen-3xl mt-5 space-y-8">
+    <div className="max-w-screen-3xl m-auto mt-5 space-y-8">
       <EmblaCarousel slides={slider_images} options={OPTIONS}></EmblaCarousel>
       <Social></Social>
       <MotivationalText></MotivationalText>
       <FeaturedArticle></FeaturedArticle>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
