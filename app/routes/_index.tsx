@@ -4,6 +4,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import Social from "~/components/social-counter/social";
 import MotivationalText from "~/components/motivation-text/motive";
 import FeaturedArticle from "~/components/feature-article/feature-article";
+import MeetAuthor from "~/components/meet-author/meet-author";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -57,6 +58,7 @@ export default function Index() {
       <Social></Social>
       <MotivationalText></MotivationalText>
       <FeaturedArticle></FeaturedArticle>
+      <MeetAuthor></MeetAuthor>
       <br />
       <br />
       <br />

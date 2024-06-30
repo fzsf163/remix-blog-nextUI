@@ -55,7 +55,7 @@ const featuredArticles = [
 export default function FeaturedArticle() {
   return (
     <div className="text-center">
-      <h1 className="fa-text  text-xl font-bold uppercase sm:text-2xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl">
+      <h1 className="fa-text text-xl font-bold uppercase sm:text-2xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl">
         Featured Article
       </h1>
       {/* cards */}
