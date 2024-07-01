@@ -24,8 +24,8 @@ const navItems = [
     icon: <IconLayoutGridFilled></IconLayoutGridFilled>,
   },
   {
-    path: "/contact",
-    name: "Contact",
+    path: "/request",
+    name: "Request",
     icon: <IconDialpadFilled></IconDialpadFilled>,
   },
 ];

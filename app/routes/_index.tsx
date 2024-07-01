@@ -6,6 +6,7 @@ import MotivationalText from "~/components/motivation-text/motive";
 import FeaturedArticle from "~/components/feature-article/feature-article";
 import MeetAuthor from "~/components/meet-author/meet-author";
 import TrendingPost from "~/components/trending-posts/trending-post";
+import Categories from "~/components/catagories/categories";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -61,6 +62,7 @@ export default function Index() {
       <FeaturedArticle></FeaturedArticle>
       <MeetAuthor></MeetAuthor>
       <TrendingPost></TrendingPost>
+      <Categories></Categories>
       <br />
       <br />
       <br />

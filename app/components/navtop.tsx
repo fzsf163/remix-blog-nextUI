@@ -11,7 +11,7 @@ const links = [
   { name: "Home", to: "/", id: 1 },
   { name: "Blogs", to: "blogs", id: 2 },
   { name: "About", to: "about", id: 3 },
-  { name: "Contact", to: "contact", id: 4 },
+  { name: "Request", to: "request", id: 4 },
 ];
 
 const itemVariants = {
