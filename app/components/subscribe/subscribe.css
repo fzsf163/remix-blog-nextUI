@@ -17,12 +17,11 @@
   letter-spacing: 1px;
   color: #070707;
 }
-.input::placeholder {
+/* .input::placeholder {
   color: rgba(255, 255, 255, 0.363);
-  /* padding: 0 5px; */
   font-weight: bold;
   font-size: larger;
-}
+} */
 .input:focus {
   border: 2px solid #023629;
   caret-color: var(--color-email-sub);
