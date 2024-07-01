@@ -11,11 +11,11 @@ const categories = [
 ];
 export default function Categories() {
   return (
-    <div className="flex items-center justify-center flex-wrap gap-2 mx-2 sm:gap-10 text-white cursor-pointer">
+    <div className="mx-2 flex cursor-pointer flex-wrap items-center justify-center gap-2 text-white sm:gap-10">
       {categories.map((c, i) => {
         return (
           <div
-            className="relative size-[100px] text-sm sm:text-xl md:text-2xl lg:text-3xl  sm:size-[200px] rounded-lg"
+            className="relative size-[100px] rounded-lg text-sm sm:size-[200px] sm:text-xl md:text-2xl"
             key={i}
             style={{
               backgroundImage: `url(${c.bgImg})`,
@@ -29,7 +29,7 @@ export default function Categories() {
               <strong className="capitalize">{c.label}</strong>
               {/* <div className="card__body">Get UI elements that help you stand out.</div> */}
               <Link to={"blogs"}>
-                <span>
+                <span className="text-sm sm:text-xl md:text-2xl">
                   See Blogs <IconArrowRight></IconArrowRight>
                 </span>
               </Link>
