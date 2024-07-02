@@ -8,6 +8,7 @@ import {
   Image,
   Button,
 } from "@nextui-org/react";
+import { Link } from "@remix-run/react";
 const featuredArticles = [
   {
     cardtitleOne: "this is card Title one",
@@ -69,10 +70,10 @@ export default function FeaturedArticle() {
               key={index + article.id}
             >
               <CardHeader className="absolute top-0 z-10 flex-col items-start rounded-md rounded-bl-none rounded-br-none bg-black/30 dark:border dark:border-default-100 dark:bg-black/80">
-                <p className="text-tiny font-bold uppercase text-white/60">
+                <p className="text-[10px] font-bold uppercase text-white/60 sm:text-base">
                   {article.cardtitleOne}
                 </p>
-                <h4 className="text-xl font-medium capitalize text-white/90">
+                <h4 className="font-medium capitalize text-white/90 sm:text-xl">
                   {article.cardtitleTwo}
                 </h4>
               </CardHeader>
@@ -98,13 +99,11 @@ export default function FeaturedArticle() {
                     </p>
                   </div>
                 </div>
-                <Button
-                  radius="full"
-                  size="lg"
-                  className="bg-black/30 text-white backdrop-blur-lg dark:bg-white/40"
-                >
-                  Read More
-                </Button>
+                <Link to={`blogs/${article.id}`}>
+                  <button className="cursor-pointer rounded-full bg-black/30 p-2 text-xs capitalize text-white backdrop-blur-lg dark:bg-white/40 lg:px-3 lg:text-lg">
+                    read more
+                  </button>
+                </Link>
               </CardFooter>
             </Card>
           );

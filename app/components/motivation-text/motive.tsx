@@ -10,9 +10,9 @@ export default function MotivationalText() {
         backgroundSize: "100% 100%",
         backgroundPosition: "center center",
       }}
-      className="pointer-events-none relative m-auto h-auto w-[90%] select-none rounded-lg p-4 text-justify text-white sm:text-center md:h-[25rem] xl:h-[40rem]"
+      className="pointer-events-none relative m-auto h-auto w-[90%] select-none rounded-lg sm:text-justify text-white sm:p-4 text-center md:h-[25rem] xl:h-[40rem]"
     >
-      <div className="flex h-full items-center justify-center bg-black/40 sm:gap-2">
+      <div className="flex h-full items-center justify-center bg-black/40 sm:gap-2 p-4">
         <div className="absolute left-2 top-[10%] sm:left-[8%]">
           <IconQuote stroke={2} className="rotate-180 md:size-20" />
         </div>
