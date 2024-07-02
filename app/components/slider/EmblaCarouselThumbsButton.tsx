@@ -1,3 +1,4 @@
+import { Tooltip } from "@nextui-org/react";
 import React from "react";
 
 type PropType = {
@@ -7,27 +8,32 @@ type PropType = {
   img: string;
 };
 
-export const Thumb: React.FC<PropType> = props => {
+export const Thumb: React.FC<PropType> = (props) => {
   const { selected, index, onClick, img } = props;
 
   return (
-    <div
-    // className={"embla-thumbs__slide".concat(
-    //   selected ? " embla-thumbs__slide--selected " : ""
-    // )}
-    >
-      <button
+    <Tooltip key={index + 12 - 3} content={`GoTo Slide ${index + 1}` } className="bg-black text-white">
+      <div
+        // className={"embla-thumbs__slide".concat(
+        //   selected ? " embla-thumbs__slide--selected " : ""
+        // )}
+        style={{
+          backgroundImage: `url("${img}")`,
+          objectFit: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center center",
+        }}
+        className={`size-[4rem] cursor-pointer rounded-lg transition-all duration-300 ease-in-out xl:size-[7rem] ${
+          selected
+            ? "scale-110 opacity-100 outline outline-4 outline-white"
+            : "opacity-80"
+        }`}
         onClick={onClick}
-        type="button"
-        className="embla-thumbs__slide__number"
       >
-        <img
-          src={img}
-          className={`w-[2rem] h-[2.5rem]  md:w-[3rem] md:h-[4rem]  lg:w-[6rem] lg:h-[8rem]  2xl:w-[10rem] 2xl:h-[12rem] rounded-lg hover:scale-95 transition-transform duration-150 ease-in-out ${
-            selected ? "border-2 border-blue-300" : ""
-          }`}
-        ></img>
-      </button>
-    </div>
+        {/* <button type="button" className="embla-thumbs__slide__number">
+      </button> */}
+      </div>
+    </Tooltip>
   );
 };
