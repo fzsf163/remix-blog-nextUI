@@ -20,7 +20,7 @@
 }
 :root[class~="dark"] {
   .card {
-    background: rgba(255, 228, 196, 0.281);
+    background: rgb(143, 143, 142);
   }
 }
 .card:hover {
