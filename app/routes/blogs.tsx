@@ -1,14 +1,9 @@
+import CategoriesTabTop from "~/components/categories-blog-page/tabs";
+
 export default function RouteComponent() {
   return (
-    <div>
-      add catagories and search here 
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
-      <div className="w-full h-[10rem] bg-blue-100">BGBGBGB</div>
+    <div className="max-w-screen-3xl m-auto capitalize">
+      <CategoriesTabTop></CategoriesTabTop>
     </div>
   );
 }
