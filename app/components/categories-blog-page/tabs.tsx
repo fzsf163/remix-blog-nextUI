@@ -448,47 +448,7 @@ let tabs = [
     ],
   },
 ];
-const horiTabs = () => {
-  const [show, setShow] = useState<boolean>(true);
-  return (
-    <div className="flex w-full flex-col items-center">
-      <button
-        className="mt-2 flex w-full items-center justify-center bg-white/40 p-5 font-semibold backdrop-blur-sm sm:hidden"
-        onClick={() => setShow(!show)}
-      >
-        Categories{" "}
-        <span
-          className={`${show ? "rotate-180" : ""} transition-transform duration-500 ease-soft-spring`}
-        >
-          <IconArrowDown stroke={2} />
-        </span>
-      </button>
-      <Tabs
-        aria-label="Categories tabs"
-        items={tabs}
-        size="lg"
-        isVertical
-        classNames={{
-          tabList: ` gap-0 sm:gap-3 md:gap-6 rounded-none p-0  border-divider  text-center w-fit flex flex-col  items-center  transition-all duration-500 ease-in-out sm:h-12 ${show ? "h-[350px]" : "h-0"}`,
-          cursor: "w-full bg-black h-1",
-          tab: "max-w-fit px-2 h-12 ",
-          tabContent:
-            "group-data-[selected=true]:text-black group-data-[selected=true]:font-bold transition-color duration-500 ease-in-out",
-        }}
-        variant="underlined"
-        className="peer-hover:bg-green-900 sm:block"
-      >
-        {(item) => (
-          <Tab key={item.id} title={<div>{item.label}</div>}>
-            <div className="w-full bg-blue-400 p-4">
-              <div className="m-auto w-fit bg-green-300"></div>
-            </div>
-          </Tab>
-        )}
-      </Tabs>
-    </div>
-  );
-};
+
 export default function CategoriesTabTop() {
   // must be capital , same as label
   const [searchParams, setSearchParams] = useSearchParams();
