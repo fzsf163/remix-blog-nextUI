@@ -8,8 +8,9 @@ export default function RequestForm() {
           placeholder="Enter your name"
           className="input-field"
           type="text"
+          id="inputName"
         />
-        <label htmlFor="input-field" className="input-label peer capitalize">
+        <label htmlFor="inputName" className="input-label peer capitalize">
           What Should We Call you
         </label>
         <span className="input-highlight"></span>
@@ -19,8 +20,9 @@ export default function RequestForm() {
           placeholder="Enter your email"
           className="input-field"
           type="email"
+          id="inputEmail"
         />
-        <label htmlFor="input-field" className="input-label peer capitalize">
+        <label htmlFor="inputEmail" className="input-label peer capitalize">
           How do we reach you?
         </label>
         <span className="input-highlight"></span>
@@ -29,8 +31,9 @@ export default function RequestForm() {
         <textarea
           placeholder="Enter your request"
           className="input-field h-[20rem]"
+          id="inputRequest"
         />
-        <label htmlFor="input-field" className="input-label peer capitalize">
+        <label htmlFor="inputRequest" className="input-label peer capitalize">
           tell us what you would like to read
         </label>
         <span className="input-highlight"></span>

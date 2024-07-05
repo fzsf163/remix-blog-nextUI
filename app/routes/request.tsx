@@ -2,7 +2,7 @@ import RequestForm from "~/components/request-inputs/request-form";
 import { IconAsterisk } from "@tabler/icons-react";
 export default function RouteComponent() {
   return (
-    <div className="m-auto mb-20 w-full max-w-[50rem] py-4 space-y-6">
+    <div className="m-auto mb-20 w-full max-w-[50rem] py-4 space-y-6 px-2">
       <div className="space-y-2">
         <h1
           style={{ fontFamily: "K2D" }}
