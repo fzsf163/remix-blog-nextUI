@@ -475,13 +475,13 @@ export default function CategoriesTabTop() {
         classNames={{
           cursor: "bg-black/30 backdrop-shadow-sm",
           base: " rounded-xl bg-transparent w-fit",
-          tabList: "p-4 shadow-md  flex-wrap flex-row",
+          tabList: "p-4 shadow-md  flex-wrap flex-row  xl:flex-nowrap",
           tab: "flex justify-start px-4 py-6 w-full",
           panel: "w-fit p-5 m-auto",
           tabContent:
             "group-data-[selected=true]:text-white group-data-[selected=true]:font-bold",
         }}
-        className=""
+        className="m-auto"
       >
         {tabs.map((tab, index) => {
           return (
@@ -498,7 +498,7 @@ export default function CategoriesTabTop() {
                 </div>
               }
             >
-              <div className="sapce-x-10 xl:colums-4 columns-1 gap-7 sm:columns-2 lg:columns-3 2xl:columns-4">
+              <div className="sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4">
                 {/* cards */}
                 {tab.content.map((blog, index) => {
                   return (

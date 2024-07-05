@@ -5,7 +5,7 @@ import SearchBox from "~/components/serachbox/searchbox";
 
 export default function RouteComponent() {
   return (
-    <div className="max-w-screen-3xl m-auto capitalize">
+    <div className="max-w-screen-3xl m-auto capitalize space-y-5 mt-2">
       <SearchBox></SearchBox>
       <ClientOnly
         fallback={
