@@ -21,32 +21,25 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 import NavTop from "./components/navtop";
 import ToTop from "./utils/scrolltotop";
+import Footer from "./components/footer/footer";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
         <NextUIProvider navigate={navigate}>
-          <NextThemesProvider
-            attribute="class"
-            defaultTheme="light"
-          >
+          <NextThemesProvider attribute="class" defaultTheme="light">
             <NavTop></NavTop>
             {children}
             <ToTop></ToTop>
+            <Footer></Footer>
           </NextThemesProvider>
         </NextUIProvider>
         <ScrollRestoration />

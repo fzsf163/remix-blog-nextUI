@@ -8,7 +8,6 @@ import MeetAuthor from "~/components/meet-author/meet-author";
 import TrendingPost from "~/components/trending-posts/trending-post";
 import Categories from "~/components/catagories/categories";
 import SubscribeBox from "~/components/subscribe/subscribe";
-import Footer from "~/components/footer/footer";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -66,7 +65,6 @@ export default function Index() {
       <TrendingPost></TrendingPost>
       <Categories></Categories>
       <SubscribeBox></SubscribeBox>
-      <Footer></Footer>
     </div>
   );
 }

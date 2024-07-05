@@ -473,13 +473,13 @@ export default function CategoriesTabTop() {
         items={tabs}
         variant="bordered"
         classNames={{
-          cursor: "bg-black/30 backdrop-shadow-sm",
+          cursor: "bg-[#d1dcf0] dark:bg-[#1c283a] backdrop-shadow-sm",
           base: " rounded-xl bg-transparent w-fit",
           tabList: "p-4 shadow-md  flex-wrap flex-row  xl:flex-nowrap",
           tab: "flex justify-start px-4 py-6 w-full",
           panel: "w-fit p-5 m-auto",
           tabContent:
-            "group-data-[selected=true]:text-white group-data-[selected=true]:font-bold",
+            "group-data-[selected=true]:text-gray-800 group-data-[selected=true]:font-bold  dark:group-data-[selected=true]:text-gray-100",
         }}
         className="m-auto"
       >
@@ -492,7 +492,7 @@ export default function CategoriesTabTop() {
                 <div className="flex items-center space-x-2 capitalize">
                   <span className="size-6 text-blue-200"> {tab.icon}</span>
                   <span> {tab.label}</span>
-                  <Chip size="sm" variant="faded">
+                  <Chip size="sm" variant="bordered">
                     {Math.floor(Math.random() * 9)}
                   </Chip>
                 </div>
@@ -513,7 +513,7 @@ export default function CategoriesTabTop() {
                       className="group relative mb-4 flex w-fit max-w-[24rem] flex-col items-center justify-center rounded-lg text-white 2xl:w-fit"
                       key={blog.title + index}
                     >
-                      <div className="absolute left-0 top-0 z-10 h-fit w-fit text-wrap break-words rounded-lg bg-black/30 p-3 backdrop-blur-sm lg:text-base xl:text-xl">
+                      <div className="absolute left-0 top-0 z-10 h-fit w-fit text-wrap break-words rounded-lg bg-black/30 p-3 font-semibold backdrop-blur-sm lg:text-base xl:text-xl">
                         {blog.title}
                       </div>
                       <div className="aspect-auto w-fit overflow-hidden rounded-lg">
