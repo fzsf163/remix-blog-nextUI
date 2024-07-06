@@ -1,4 +1,13 @@
-export default function RouteComponent() {
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { db } from "~/utils/db.server";
+export async function loader({ request }: LoaderFunctionArgs) {
+  const posts = await db.post.findMany();
+  return { posts };
+}
+
+export default function About() {
+  const {posts} = useLoaderData<typeof loader>();
   return (
     <div>
       <div className="h-fit w-full bg-slate-600 pb-10 pt-5 text-white sm:pt-24">
