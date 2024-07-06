@@ -30,7 +30,7 @@ export default function RequestForm() {
       <div className="input-container">
         <textarea
           placeholder="Enter your request"
-          className="input-field h-[20rem]"
+          className="input-field h-[10rem] resize-none"
           id="inputRequest"
         />
         <label htmlFor="inputRequest" className="input-label peer capitalize">
