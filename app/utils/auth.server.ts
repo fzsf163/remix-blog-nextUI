@@ -19,7 +19,7 @@ authenticator.use(
   new FormStrategy(async ({ form }) => {
     let email = form.get("email") as string;
     let password = form.get("password") as string;
-    console.log("🚀 ~ newFormStrategy ~ password:", password);
+
     // let user = await login(email, password);
     let user = null;
     // the type of this user must match the type you pass to the Authenticator
@@ -35,18 +35,14 @@ authenticator.use(
     const hashPass = await argon2.hash(password).then((value) => {
       return value;
     });
-    console.log("🚀 ~ hashPass ~ hashPass:", hashPass);
 
     let getUser = await FindOrCreateUser(email, hashPass);
-
-    console.log("🚀 ~ newFormStrategy ~ getUser:", getUser);
 
     const verify = await argon2
       .verify(getUser.password, password)
       .then((value) => {
         return value;
       });
-    console.log("🚀 ~ newFormStrategy ~ verify:", verify);
 
     if (verify === true) {
       let id = getUser?.userID;
