@@ -21,6 +21,7 @@ export default function SecondaryNav() {
     { label: "home options", to: "/admin/homeOptions" },
     { label: "about options", to: "/admin/aboutOptions" },
     { label: "request options", to: "/admin/requestOptions" },
+    { label: "author options", to: "/admin/authorOptions" },
     { label: "create blog", to: "/admin/createBlog" },
   ];
   return (
@@ -48,7 +49,7 @@ export default function SecondaryNav() {
       </button>
 
       <div
-        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-100  dark:bg-neutral-500 backdrop-blur-sm ${opened ? " h-[17rem] w-[18rem]" : "h-0 w-0"} duration-[4s] ease-in-out transition-size`}
+        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-100  dark:bg-neutral-500 backdrop-blur-sm ${opened ? " h-[20rem] w-[18rem]" : "h-0 w-0"} duration-[4s] ease-in-out transition-size`}
       >
         {routes.map((route, index) => {
           return (
