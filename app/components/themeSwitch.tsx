@@ -4,13 +4,14 @@ import {
   useSwitch,
   VisuallyHidden,
   SwitchProps,
+  Tooltip,
 } from "@nextui-org/react";
 
 import { JSX } from "react/jsx-runtime";
 import { useTheme } from "next-themes";
 
 export const MoonIcon = (
-  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) => (
   <svg
     aria-hidden="true"
@@ -29,7 +30,7 @@ export const MoonIcon = (
 );
 
 export const SunIcon = (
-  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) => (
   <svg
     aria-hidden="true"
@@ -66,40 +67,42 @@ const ThemeSwitch = (props: SwitchProps) => {
   if (!mounted) return null;
 
   return (
-    <div className="flex flex-col gap-2">
-      <Component {...getBaseProps()}>
-        <VisuallyHidden>
-          <input
-            {...getInputProps()}
-            onClick={() => {
-              if (theme === "light") {
-                setTheme("dark");
-              }
-              if (theme === "dark") {
-                setTheme("light");
-              }
-            }}
-          />
-        </VisuallyHidden>
-        <div
-          {...getWrapperProps({
-            style: {
-            //   backgroundColor: theme === "light" ? "gray":"wheat",
-            },
-          })}
-          className={slots.wrapper({
-            class: [
-              "w-8 h-8",
-              "flex items-center justify-center",
-              "light  rounded-md light:bg-blue-500 light:text-white  hover:bg-default-200 dark:bg-default-800  focus:bg-current",
-            ],
-          })}
-        >
-          {theme === "light" ? <SunIcon /> : <MoonIcon />}
-        </div>
-      </Component>
-      {/* <p className="text-default-500 select-none">Theme: {theme}</p> */}
-    </div>
+    <Tooltip content="Switch Theme">
+      <div className="flex flex-col gap-2">
+        <Component {...getBaseProps()}>
+          <VisuallyHidden>
+            <input
+              {...getInputProps()}
+              onClick={() => {
+                if (theme === "light") {
+                  setTheme("dark");
+                }
+                if (theme === "dark") {
+                  setTheme("light");
+                }
+              }}
+            />
+          </VisuallyHidden>
+          <div
+            {...getWrapperProps({
+              style: {
+                //   backgroundColor: theme === "light" ? "gray":"wheat",
+              },
+            })}
+            className={slots.wrapper({
+              class: [
+                "h-8 w-8",
+                "flex items-center justify-center",
+                "rounded-md light hover:bg-default-200 focus:bg-current light:bg-blue-500 light:text-white dark:bg-default-800",
+              ],
+            })}
+          >
+            {theme === "light" ? <SunIcon /> : <MoonIcon />}
+          </div>
+        </Component>
+        {/* <p className="text-default-500 select-none">Theme: {theme}</p> */}
+      </div>
+    </Tooltip>
   );
 };
 
