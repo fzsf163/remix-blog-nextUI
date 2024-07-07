@@ -18,7 +18,7 @@ export default function LogIn() {
         />
         <button>Sign In</button>
       </Form>
-      {/* <div>{user ? user?.error?.message : ""} </div> */}
+      <div>{user ? user?.error?.message : ""} </div>
     </div>
   );
 }
@@ -37,13 +37,13 @@ export async function action({ request }: ActionFunctionArgs) {
 // dashboard if it is or return null if it's not
 export async function loader({ request }: LoaderFunctionArgs) {
   // If the user is already authenticated redirect to /dashboard directly
-  return await authenticator.isAuthenticated(request, {
+   await authenticator.isAuthenticated(request, {
     successRedirect: "/admin",
   });
-  // const session = await sessionStorage.getSession(
-  //   request.headers.get("Cookie"),
-  // );
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
 
-  // const error = session.get("sessionErrorKey");
-  // return json<any>(error ? { error } : { OK: "ok" });
+  const error = session.get("sessionErrorKey");
+  return json<any>(error ? { error } : { OK: "ok" });
 }
