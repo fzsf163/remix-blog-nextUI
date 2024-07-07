@@ -5,7 +5,7 @@ import { Tooltip } from "@nextui-org/react";
 import SecondaryNav from "./secondaryNav";
 export default function PrimaryNav() {
   return (
-    <div className="sticky top-0 flex h-[4rem] items-center justify-center gap-4 bg-white/30 backdrop-blur-sm">
+    <div className="sticky top-0 flex h-[4rem] items-center justify-center gap-4 bg-white/30 dark:bg-neutral-600/10  backdrop-blur-sm z-50">
       <div>
         <SecondaryNav></SecondaryNav>
       </div>

@@ -9,7 +9,7 @@ import { requireUserSession } from "~/utils/session.server";
 export default function Admin() {
   const { userID } = useLoaderData<typeof loader>();
   return (
-    <div>
+    <div style={{fontFamily:"K2D"}}>
       <PrimaryNav></PrimaryNav>
       <Outlet context={userID}></Outlet>
     </div>

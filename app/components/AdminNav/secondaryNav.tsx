@@ -48,7 +48,7 @@ export default function SecondaryNav() {
       </button>
 
       <div
-        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-500/10 backdrop-blur-sm ${opened ? "h-[17rem] w-[18rem]" : "h-0 w-0"} duration-[4s] ease-in-out transition-size`}
+        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-100  dark:bg-neutral-500 backdrop-blur-sm ${opened ? " h-[17rem] w-[18rem]" : "h-0 w-0"} duration-[4s] ease-in-out transition-size`}
       >
         {routes.map((route, index) => {
           return (
@@ -58,7 +58,7 @@ export default function SecondaryNav() {
                   className={`text-xl capitalize ${isActive ? "text-purple-400 dark:text-green-300" : ""} transition-color group relative duration-100 ease-in-out`}
                   onClick={changeOpen}
                 >
-                  <p className="transition-color group relative flex items-center justify-center gap-2 text-nowrap duration-300 ease-in-out hover:text-purple-600">
+                  <p className="transition-color group relative flex items-center justify-center gap-2 text-nowrap duration-300 ease-in-out hover:text-purple-600 dark:hover:text-purple-300">
                     <span className="absolute left-0 top-2 -translate-x-[200px] -rotate-45 transition-transform duration-500 ease-in-out group-hover:-translate-x-[31px]">
                       <IconArrowRight
                         stroke={2}
