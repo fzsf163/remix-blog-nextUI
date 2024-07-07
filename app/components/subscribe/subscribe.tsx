@@ -3,7 +3,7 @@ import "./subscribe.css";
 import { IconMailFilled } from "@tabler/icons-react";
 export default function SubscribeBox() {
   return (
-    <div className="m-auto xl:max-w-[90%] space-y-4 bg-slate-400/30 py-12 text-center">
+    <div className="m-auto xl:max-w-[90%] space-y-4 bg-slate-400/30 py-12 text-center rounded-lg">
       <h1 className="get-notified fa-text text-sm font-extrabold capitalize sm:text-5xl xl:text-6xl">
         Get notified with new articles
       </h1>

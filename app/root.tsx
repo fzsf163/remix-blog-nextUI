@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
   useNavigate,
 } from "@remix-run/react";
 import "./tailwind.css";
@@ -15,7 +16,7 @@ import {
   ThemeProvider,
   useTheme,
 } from "remix-themes";
-import { themeSessionResolver } from "./sessions.server";
+import { themeSessionResolver } from "./sessionstheme.server";
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
@@ -25,6 +26,8 @@ import Footer from "./components/footer/footer";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const path = useLocation();
+  let route = path.pathname;
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -36,10 +39,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <NextUIProvider navigate={navigate}>
           <NextThemesProvider attribute="class" defaultTheme="light">
-            <NavTop></NavTop>
+            {(route === "/" ||
+              route === "/about" ||
+              route === "/blogs" ||
+              route === "/request") && <NavTop></NavTop>}
             {children}
+            {(route === "/" ||
+              route === "/about" ||
+              route === "/blogs" ||
+              route === "/request") && <Footer></Footer>}
+
             <ToTop></ToTop>
-            <Footer></Footer>
           </NextThemesProvider>
         </NextUIProvider>
         <ScrollRestoration />
