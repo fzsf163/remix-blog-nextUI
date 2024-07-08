@@ -1,4 +1,5 @@
 import React from "react";
+import "./customcell.css";
 import {
   Table,
   TableHeader,
@@ -44,17 +45,71 @@ const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
 export default function CustomCells() {
   const [page, setPage] = React.useState(1);
+  const [filterValue, setFilterValue] = React.useState("");
 
-  const rowsPerPage = 4;
+  const hasSearchFilter = Boolean(filterValue);
+  console.log("🚀 ~ CustomCells ~ hasSearchFilter:", hasSearchFilter);
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const filteredItems = React.useMemo(() => {
+    let filteredUsers = [...users];
+    // console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
+
+    if (hasSearchFilter) {
+      filteredUsers = filteredUsers.filter((user) =>
+        user.name.toLowerCase().includes(filterValue.toLowerCase()),
+      );
+      console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
+    }
+    // if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    //   filteredUsers = filteredUsers.filter((user) =>
+    //     Array.from(statusFilter).includes(user.status),
+    //   );
+    // }
+
+    return filteredUsers;
+  }, [users, filterValue]);
+
+  const onSearchChange = React.useCallback((value?: string) => {
+    console.log("🚀 ~ onSearchChange ~ value:", value);
+    if (value) {
+      setFilterValue(value);
+      setPage(1);
+    } else {
+      setFilterValue("");
+    }
+  }, []);
+
+  const onClear = React.useCallback(() => {
+    setFilterValue("");
+    setPage(1);
+  }, []);
+
+  const rowsPerPage = 6;
+  // const pages = Math.ceil(users.length / rowsPerPage);
+  const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return users.slice(start, end);
-  }, [page, users]);
+    // return users.slice(start, end);
+    return filteredItems.slice(start, end);
+  }, [page, users, filteredItems]);
+
+  const topContent = React.useMemo(() => {
+    return (
+      <Input
+        isClearable
+        type="search"
+        placeholder="Search By Name..."
+        variant="bordered"
+        startContent={<SearchIcon />}
+        value={filterValue}
+        onClear={() => onClear()}
+        onValueChange={onSearchChange}
+      ></Input>
+    );
+  }, [filterValue, onSearchChange, users.length, hasSearchFilter]);
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -69,7 +124,9 @@ export default function CustomCells() {
           //   >
           //     {user.email}
           //   </User>
-          <div>{user.email}</div>
+          <div>
+            <h1 className="font-bold capitalize">{user.email}</h1>
+          </div>
         );
       case "role":
         return (
@@ -123,7 +180,7 @@ export default function CustomCells() {
     <Table
       classNames={{
         wrapper: "bg-neutral-300 text-black shadow-lg",
-        th:"bg-slate-200 shadow-md"
+        th: "bg-slate-200 shadow-md",
       }}
       aria-label="posts"
       bottomContent={
@@ -139,9 +196,7 @@ export default function CustomCells() {
           />
         </div>
       }
-      topContent={
-        <Input type="search" label="Search content" variant="bordered"></Input>
-      }
+      topContent={topContent}
     >
       <TableHeader columns={columns} className="bg-blue-300">
         {(column) => (
@@ -153,9 +208,9 @@ export default function CustomCells() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={items}>
+      <TableBody items={items ?? []} emptyContent="No Data to show">
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow key={item?.id}>
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
