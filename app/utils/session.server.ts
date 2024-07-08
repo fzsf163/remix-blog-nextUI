@@ -1,17 +1,20 @@
 // app/services/session.server.ts
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 const isProduction = process.env.NODE_ENV === "production";
-const s = process.env.SESSION_SECRET!;
-const key =
+const s =
+  process.env.SESSION_SECRET ||
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc3N1ZXIgKGlzcykiOiJJc3N1ZXIiLCJJc3N1ZWQgQXQgKGlhdCkiOiIyMDI0LTAzLTE4VDE1OjU5OjE4LjA4MFoiLCJFeHBpcmF0aW9uIFRpbWUgKGV4cCkiOiIyMDI0LTAzLTE4VDE2OjU5OjE4LjA4MFoiLCJTdWJqZWN0IChzdWIpIjoiU3ViamVjdCIsIlVzZXJuYW1lIChhdWQpIjoiSmF2YUd1aWRlcyIsIlJvbGUiOiJBRE1JTiJ9.jzfxlg2pOn2YU4hV2prIOMFDmdNzuxuW054vzNYt5ao";
+console.log("🚀 ~ s:", s);
+
 // export the whole sessionStorage object
 export let sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session", // use any name you want here
+    maxAge: 60 * 60 * 24,
     sameSite: "lax", // this helps with CSRF
     path: "/", // remember to add this so the cookie will work in all routes
     httpOnly: true, // for security reasons, make this cookie http only
-    secrets: [key], // replace this with an actual secret
+    secrets: [s], // replace this with an actual secret
     ...(isProduction
       ? { domain: "your-production-domain.com", secure: true }
       : {}),

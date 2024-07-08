@@ -1,9 +1,15 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData, useOutletContext } from "@remix-run/react";
+import { ClientOnly } from "remix-utils/client-only";
+import CustomCells from "~/components/poststable/custiomcell";
+import PostTable from "~/components/poststable/poststable";
 import StatCard from "~/components/statCard/statCard";
 import { db } from "~/utils/db.server";
+import { requireUserSession } from "~/utils/session.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const session = await requireUserSession(request);
+  const userID = session?.data?.sessionKey?.userID;
   const postCount = await db.post.count();
   const commentsCount = await db.comments.count();
   const viewsCount = await db.post.findMany({
@@ -49,6 +55,12 @@ export default function Dashboard() {
           forStat={"Shares"}
           icon={"/public/dashboardcards/share-svgrepo-com.svg"}
         ></StatCard>
+      </div>
+      <div>
+        <h1 className="text-xl font-bold">Posts</h1>
+        {/* <PostTable></PostTable> */}
+        <br />
+         <CustomCells></CustomCells>
       </div>
     </div>
   );

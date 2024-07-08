@@ -17,7 +17,7 @@ export default function PrimaryNav() {
       </h1>
       <div className="flex items-center justify-center">
         <ThemeToggler></ThemeToggler>
-        <Form method="POST" action="/admin">
+        <Form method="POST" action="/admin" reloadDocument>
           <Tooltip content="Logout">
             <button
               type="submit"
