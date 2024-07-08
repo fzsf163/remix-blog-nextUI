@@ -58,7 +58,6 @@ export default function Dashboard() {
       </div>
       <div>
         <h1 className="text-xl font-bold">Posts</h1>
-        {/* <PostTable></PostTable> */}
         <br />
          <CustomCells></CustomCells>
       </div>
