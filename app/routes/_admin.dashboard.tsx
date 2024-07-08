@@ -1,8 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData, useOutletContext } from "@remix-run/react";
-import { ClientOnly } from "remix-utils/client-only";
 import CustomCells from "~/components/poststable/custiomcell";
-import PostTable from "~/components/poststable/poststable";
 import StatCard from "~/components/statCard/statCard";
 import { db } from "~/utils/db.server";
 import { requireUserSession } from "~/utils/session.server";
@@ -32,7 +30,7 @@ export default function Dashboard() {
   return (
     <div className="m-auto my-5 w-[60%] space-y-10 py-5">
       <h1 className="text-4xl font-bold">Dashboard</h1>
-      <div className="flex items-center justify-center gap-6 flex-wrap">
+      <div className="flex flex-wrap items-center justify-center gap-6">
         <StatCard
           count={formatter.format(postCount)}
           forStat={"Posts"}
@@ -59,7 +57,7 @@ export default function Dashboard() {
       <div>
         <h1 className="text-xl font-bold">Posts</h1>
         <br />
-         <CustomCells></CustomCells>
+        <CustomCells></CustomCells>
       </div>
     </div>
   );
