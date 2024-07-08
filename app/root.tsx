@@ -9,6 +9,7 @@ import {
   useNavigate,
 } from "@remix-run/react";
 import "./tailwind.css";
+import "react-toastify/dist/ReactToastify.css";
 import { NextUIProvider } from "@nextui-org/react";
 import clsx from "clsx";
 import {
@@ -23,6 +24,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import NavTop from "./components/navtop";
 import ToTop from "./utils/scrolltotop";
 import Footer from "./components/footer/footer";
+import { ToastContainer } from "react-toastify";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
@@ -39,15 +41,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <NextUIProvider navigate={navigate}>
           <NextThemesProvider attribute="class" defaultTheme="light">
-            {(route === "/" ||
+            {/* {(route === "/" ||
               route === "/about" ||
               route === "/blogs" ||
-              route === "/request") && <NavTop></NavTop>}
+              route === "/request") && <NavTop></NavTop>} */}
             {children}
-            {(route === "/" ||
+            {/* {(route === "/" ||
               route === "/about" ||
               route === "/blogs" ||
-              route === "/request") && <Footer></Footer>}
+              route === "/request") && <Footer></Footer>} */}
 
             <ToTop></ToTop>
           </NextThemesProvider>
@@ -60,5 +62,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div>
+      <Outlet />
+      <ToastContainer theme="dark" bodyClassName={"font-bold"} style={{fontFamily:"K2D"}} />
+    </div>
+  );
 }
