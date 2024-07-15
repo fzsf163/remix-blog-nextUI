@@ -28,7 +28,7 @@ export default function Dashboard() {
     return +a + +b;
   }, 0);
   return (
-    <div className="m-auto my-5 w-[60%] space-y-10 py-5">
+    <div className="m-auto my-5 w-full sm:w-[60%] space-y-10 px-4 py-5">
       <h1 className="text-4xl font-bold">Dashboard</h1>
       <div className="flex flex-wrap items-center justify-center gap-6">
         <StatCard

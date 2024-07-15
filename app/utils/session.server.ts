@@ -4,7 +4,6 @@ const isProduction = process.env.NODE_ENV === "production";
 const s =
   process.env.SESSION_SECRET ||
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc3N1ZXIgKGlzcykiOiJJc3N1ZXIiLCJJc3N1ZWQgQXQgKGlhdCkiOiIyMDI0LTAzLTE4VDE1OjU5OjE4LjA4MFoiLCJFeHBpcmF0aW9uIFRpbWUgKGV4cCkiOiIyMDI0LTAzLTE4VDE2OjU5OjE4LjA4MFoiLCJTdWJqZWN0IChzdWIpIjoiU3ViamVjdCIsIlVzZXJuYW1lIChhdWQpIjoiSmF2YUd1aWRlcyIsIlJvbGUiOiJBRE1JTiJ9.jzfxlg2pOn2YU4hV2prIOMFDmdNzuxuW054vzNYt5ao";
-console.log("🚀 ~ s:", s);
 
 // export the whole sessionStorage object
 export let sessionStorage = createCookieSessionStorage({

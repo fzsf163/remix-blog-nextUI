@@ -48,7 +48,7 @@ export default function CustomCells() {
   const [filterValue, setFilterValue] = React.useState("");
 
   const hasSearchFilter = Boolean(filterValue);
-  console.log("🚀 ~ CustomCells ~ hasSearchFilter:", hasSearchFilter);
+  // console.log("🚀 ~ CustomCells ~ hasSearchFilter:", hasSearchFilter);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
@@ -58,7 +58,7 @@ export default function CustomCells() {
       filteredUsers = filteredUsers.filter((user) =>
         user.name.toLowerCase().includes(filterValue.toLowerCase()),
       );
-      console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
+      // console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
     }
     // if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
     //   filteredUsers = filteredUsers.filter((user) =>
@@ -182,6 +182,7 @@ export default function CustomCells() {
         wrapper: "bg-neutral-300 text-black shadow-lg",
         th: "bg-slate-200 shadow-md",
       }}
+      // className="w-fit"
       aria-label="posts"
       bottomContent={
         <div className="flex w-full justify-center">

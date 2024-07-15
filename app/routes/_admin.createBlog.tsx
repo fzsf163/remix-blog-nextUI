@@ -1,7 +1,3 @@
 export default function CreateBlog() {
-  return (
-    <div>
-      This is create blog
-    </div>
-  );
+  return <div className="bg-slate-300"></div>;
 }
