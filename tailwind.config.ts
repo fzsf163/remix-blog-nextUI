@@ -1,4 +1,3 @@
-import { color } from "framer-motion";
 import type { Config } from "tailwindcss";
 const { nextui } = require("@nextui-org/react");
 export default {

@@ -1,7 +1,7 @@
 import { IconArrowRight } from "@tabler/icons-react";
 
-import "./meet-author.css";
 import { Link } from "@remix-run/react";
+import "./meet-author.css";
 export default function MeetAuthor() {
   return (
     <div className="parent-author m-auto flex items-center justify-center gap-2 rounded-lg bg-slate-500/30 sm:p-4 xl:w-[60%]">
@@ -44,7 +44,7 @@ export default function MeetAuthor() {
       <div className="group overflow-hidden rounded-lg">
         <div className="hidden sm:block">
           <img
-            src="/public/auhtor-image/1.jpg"
+            src="auhtor-image/1.jpg"
             className="rounded-lg transition-transform duration-500 ease-soft-spring group-hover:scale-110"
             alt="author image"
           />

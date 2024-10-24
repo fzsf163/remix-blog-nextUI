@@ -35,7 +35,7 @@ export default function ToTop() {
         id="myBtn"
         className={
           showBtn
-            ? `fixed bottom-5 right-5 h-[4rem] w-[3rem] rounded-full bg-slate-800/40 text-white hover:bg-blue-200 hover:text-black`
+            ? `fixed z-50 bottom-5 right-5 h-[4rem] w-[3rem] rounded-full bg-slate-800/40 text-white hover:bg-blue-200 hover:text-black`
             : `hidden`
         }
         title="Go to top"

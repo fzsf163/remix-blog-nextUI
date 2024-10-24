@@ -4,7 +4,7 @@ import NavTop from "~/components/navtop";
 
 export default function HomeLayout() {
   return (
-    <div>
+    <div className="w-full">
       <NavTop></NavTop>
       <Outlet></Outlet>
       <Footer></Footer>

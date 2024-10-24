@@ -1,7 +1,7 @@
 
 @media (max-width:425px){
     .parent-author{
-    background-image: url("/public/auhtor-image/1.jpg");
+    background-image: url("auhtor-image/1.jpg");
     color: white;
     background-position: center center;
     margin: 10px;

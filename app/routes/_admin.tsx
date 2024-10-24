@@ -1,18 +1,12 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet, redirect } from "@remix-run/react";
+import { Outlet } from "@remix-run/react";
 import PrimaryNav from "~/components/AdminNav/primaryNav";
-
-import { authenticator } from "~/utils/auth.server";
-import { requireUserSession } from "~/utils/session.server";
+import "../components/submitbutton/btn.css";
 
 export default function Admin() {
   return (
-    <div style={{ fontFamily: "K2D" }}>
+    <div style={{ fontFamily: "K2D, sans-serif" }}>
       <PrimaryNav></PrimaryNav>
       <Outlet></Outlet>
     </div>
   );
 }
-
-

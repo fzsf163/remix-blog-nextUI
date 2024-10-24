@@ -44,8 +44,8 @@ export default function NavItems() {
     }
   }
 
-  const [hoveredPath, setHoveredPath] = useState(pathname);
-  const [activeNow, setActiveNow] = useState(pathname);
+  // const [hoveredPath, setHoveredPath] = useState(pathname);
+  // const [activeNow, setActiveNow] = useState(pathname);
   // useEffect(() => {
   //   if (location.pathname) {
   //     if (patharray[1] === "") {
@@ -73,14 +73,14 @@ export default function NavItems() {
               }`}
               data-active={isActive}
               to={item.path}
-              onMouseOver={() => setHoveredPath(item.path)}
-              onMouseLeave={() => setHoveredPath(pathname)}
+              // onMouseOver={() => setHoveredPath(item.path)}
+              // onMouseLeave={() => setHoveredPath(pathname)}
             >
               <span className="flex items-center justify-center gap-2 mix-blend-exclusion transition-all duration-100 ease-in-out hover:text-white">
                 {" "}
                 {item.icon} {item.name}
               </span>
-              {item.path === hoveredPath && (
+              {item.path === pathname && (
                 <motion.div
                   className="absolute bottom-0 left-0 -z-10 h-full rounded-md bg-stone-800/90 dark:bg-zinc-200"
                   layoutId="navbar"

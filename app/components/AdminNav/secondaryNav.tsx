@@ -1,7 +1,7 @@
 import { NavLink } from "@remix-run/react";
-import { useRef, useState } from "react";
 import { IconArrowRight } from "@tabler/icons-react";
-import './menubtn.css'
+import { useRef, useState } from "react";
+import "./menubtn.css";
 export default function SecondaryNav() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [opened, setOpend] = useState(false);
@@ -19,10 +19,10 @@ export default function SecondaryNav() {
   }
   const routes = [
     { label: "dashboard", to: "/dashboard" },
-    { label: "home options", to: "/homeOptions" },
-    { label: "about options", to: "/aboutOptions" },
-    { label: "request options", to: "/requestOptions" },
-    { label: "author options", to: "/authorOptions" },
+    { label: "home", to: "/homeOptions" },
+    { label: "about", to: "/aboutOptions" },
+    { label: "request", to: "/requestOptions" },
+    // { label: "author options", to: "/authorOptions" },
     { label: "create blog", to: "/createBlog" },
   ];
   return (
@@ -50,12 +50,13 @@ export default function SecondaryNav() {
       </button>
 
       <div
-        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-100 backdrop-blur-sm dark:bg-neutral-500 ${opened ? "h-[20rem] w-[18rem]" : "h-0 w-0"} duration-[4s] ease-in-out transition-size`}
+        className={`absolute left-0 top-16 flex flex-col items-center justify-center gap-5 overflow-hidden rounded-md bg-blue-100 backdrop-blur-sm dark:bg-neutral-500 ${opened ? "h-[20rem] w-[18rem] opacity-100" : "h-0 w-0 opacity-0"} transition-all duration-500 ease-in-out`}
       >
-        {routes.map((route, index) => {
+        {routes.map((route) => {
           return (
             <NavLink key={route.label} to={route.to}>
-              {({ isActive, isPending, isTransitioning }) => (
+              {({ isActive }) => (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                 <div
                   className={`text-xl capitalize ${isActive ? "text-purple-400 dark:text-green-300" : ""} transition-color group relative duration-100 ease-in-out`}
                   onClick={changeOpen}

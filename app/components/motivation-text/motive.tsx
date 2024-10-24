@@ -4,7 +4,7 @@ export default function MotivationalText() {
   return (
     <div
       style={{
-        backgroundImage: "url('/public/motivation/1.jpg')",
+        backgroundImage: "url('motivation/1.jpg')",
         objectFit: "contain",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",

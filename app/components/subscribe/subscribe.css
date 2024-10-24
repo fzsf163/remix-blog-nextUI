@@ -15,7 +15,7 @@
   /* font-family: monospace; */
   border-radius: 5px;
   letter-spacing: 1px;
-  color: #070707;
+  color: #d6caca;
 }
 /* .input::placeholder {
   color: rgba(255, 255, 255, 0.363);
@@ -26,8 +26,9 @@
   border: 2px solid #023629;
   caret-color: var(--color-email-sub);
   /* color: var(--color-email-sub); */
-  color: black;
+  color: rgb(247, 243, 243);
   font-weight: bold;
+  font-size: 20px;
   -webkit-box-shadow: 4px 4px 10px #070707;
   box-shadow: 4px 4px 10px #070707;
 }

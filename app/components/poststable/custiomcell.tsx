@@ -1,31 +1,31 @@
-import React from "react";
-import "./customcell.css";
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  User,
-  Chip,
-  Tooltip,
-  ChipProps,
-  getKeyValue,
-  Pagination,
-  Input,
-  Dropdown,
-  DropdownTrigger,
   Button,
-  DropdownMenu,
+  Chip,
+  ChipProps,
+  Dropdown,
   DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  getKeyValue,
+  Input,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
+  User,
 } from "@nextui-org/react";
-import { EditIcon } from "./EditIcon";
+import React from "react";
 import { DeleteIcon } from "./DeleteIcon";
+import { EditIcon } from "./EditIcon";
 import { EyeIcon } from "./EyeIcon";
+import "./customcell.css";
 import { columns, users } from "./customuser";
-import { SearchIcon } from "./searchIcon";
 import { ChevronDownIcon } from "./downIcon";
+import { SearchIcon } from "./searchIcon";
 import { capitalize } from "./utls";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
@@ -67,7 +67,7 @@ export default function CustomCells() {
     // }
 
     return filteredUsers;
-  }, [users, filterValue]);
+  }, [filterValue, hasSearchFilter]);
 
   const onSearchChange = React.useCallback((value?: string) => {
     console.log("🚀 ~ onSearchChange ~ value:", value);
@@ -94,7 +94,7 @@ export default function CustomCells() {
 
     // return users.slice(start, end);
     return filteredItems.slice(start, end);
-  }, [page, users, filteredItems]);
+  }, [page, filteredItems]);
 
   const topContent = React.useMemo(() => {
     return (
@@ -109,7 +109,7 @@ export default function CustomCells() {
         onValueChange={onSearchChange}
       ></Input>
     );
-  }, [filterValue, onSearchChange, users.length, hasSearchFilter]);
+  }, [filterValue, onSearchChange, onClear]);
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -152,6 +152,7 @@ export default function CustomCells() {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip content="Details">
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
               <span
                 className="cursor-pointer text-lg text-default-400 active:opacity-50"
                 onClick={() => console.log(user.id)}
@@ -180,9 +181,8 @@ export default function CustomCells() {
     <Table
       classNames={{
         wrapper: "bg-neutral-300 text-black shadow-lg",
-        th: "bg-slate-200 shadow-md",
+        th: "bg-slate-200 shadow-sm",
       }}
-      // className="w-fit"
       aria-label="posts"
       bottomContent={
         <div className="flex w-full justify-center">

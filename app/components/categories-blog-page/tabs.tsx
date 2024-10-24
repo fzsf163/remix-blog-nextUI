@@ -1,7 +1,6 @@
-import { Tabs, Tab, Chip } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Chip, Tab, Tabs } from "@nextui-org/react";
+import { Link, useSearchParams } from "@remix-run/react";
 import {
-  IconArrowDown,
   IconArrowRight,
   IconBrain,
   IconBusinessplan,
@@ -11,8 +10,8 @@ import {
   IconSpiral,
   IconWall,
 } from "@tabler/icons-react";
-import { Link, useSearchParams } from "@remix-run/react";
-let tabs = [
+import { useEffect, useState } from "react";
+const tabs = [
   {
     id: "all",
     label: "All",
@@ -76,8 +75,8 @@ let tabs = [
     ],
   },
   {
-    id: "sprituality",
-    label: "Sprituality",
+    id: "Spirituality",
+    label: "Spirituality",
     icon: <IconSpiral stroke={2} color="blue" />,
     content: [
       {
@@ -449,34 +448,43 @@ let tabs = [
   },
 ];
 
-export default function CategoriesTabTop() {
+export default function CategoriesTabTop({
+  searchTerm,
+}: {
+  searchTerm: string | null;
+}) {
+  console.log("🚀 ~ searchTerm:", searchTerm);
   // must be capital , same as label
   const [searchParams, setSearchParams] = useSearchParams();
-  let searchCategory = searchParams.get("category");
-  const [selected, setSelected] = useState(searchCategory ?? "All");
+  const searchCategory = searchParams.get("category");
+  const [selected, setSelected] = useState(searchCategory ?? "all");
 
   useEffect(() => {
+    if (searchTerm) {
+      setSearchParams(searchTerm);
+    }
     setSearchParams(
       new URLSearchParams({ category: String(selected) }).toString(),
       { preventScrollReset: true, relative: "path" },
     );
-  }, [selected]);
+  }, [selected, searchTerm, setSearchParams]);
   return (
     <div className="flex w-full flex-col items-center justify-start px-4">
       <Tabs
-        aria-label="Categories"
+        aria-label="Categories for blogs"
         selectedKey={selected}
         onSelectionChange={(x) => {
           setSelected(x.toString());
         }}
         // isVertical
         items={tabs}
-        variant="bordered"
+        variant="solid"
         classNames={{
-          cursor: "bg-[#d1dcf0] dark:bg-[#1c283a] backdrop-shadow-sm",
-          base: " rounded-xl bg-transparent w-fit",
-          tabList: "p-4 shadow-md  flex-wrap flex-row  xl:flex-nowrap",
-          tab: "flex justify-start px-4 py-6 w-full",
+          cursor: "bg-[#d1dcf0] dark:bg-[#1c283a] rounded backdrop-shadow-sm",
+          base: "rounded-xl bg-transparent w-fit",
+          tabList:
+            "p-4 rounded shadow items-center sm:justify-center flex-wrap flex-row  xl:flex-nowrap",
+          tab: "flex items-center justify-center px-4 py-6 w-fit",
           panel: "w-fit p-5 m-auto",
           tabContent:
             "group-data-[selected=true]:text-gray-800 group-data-[selected=true]:font-bold  dark:group-data-[selected=true]:text-gray-100",
@@ -489,11 +497,11 @@ export default function CategoriesTabTop() {
               key={tab.label}
               id={tab.label}
               title={
-                <div className="flex items-center space-x-2 capitalize">
-                  <span className="size-6 text-blue-200"> {tab.icon}</span>
-                  <span> {tab.label}</span>
+                <div className="flex items-center gap-3 capitalize">
+                  <div className="size-6 text-blue-200"> {tab.icon}</div>
+                  <p className=""> {tab.label}</p>
                   <Chip size="sm" variant="bordered">
-                    {Math.floor(Math.random() * 9)}
+                    {index + 10}
                   </Chip>
                 </div>
               }
@@ -503,27 +511,24 @@ export default function CategoriesTabTop() {
                 {tab.content.map((blog, index) => {
                   return (
                     <div
-                      // style={{
-                      //   backgroundImage: "url('/blogspage-cards/1.jpg')",
-                      //   objectFit: "contain",
-                      //   backgroundRepeat: "no-repeat",
-                      //   backgroundSize: "100% 100%",
-                      //   backgroundPosition: "center center",
-                      // }}
                       className="group relative mb-4 flex w-fit max-w-[24rem] flex-col items-center justify-center rounded-lg text-white 2xl:w-fit"
                       key={blog.title + index}
                     >
-                      <div className="absolute left-0 top-0 z-10 h-fit w-fit text-wrap break-words rounded-lg bg-black/30 p-3 font-semibold backdrop-blur-sm lg:text-base xl:text-xl">
+                      <div className="absolute left-0 top-0 z-10 flex h-fit w-fit flex-col items-start text-wrap break-words rounded-lg rounded-b-none bg-black/30 p-4 text-sm font-semibold backdrop-blur-sm sm:text-base xl:text-xl">
+                        <span className="text-sm font-medium text-white/40 sm:text-medium">
+                          {tab.label}
+                        </span>
                         {blog.title}
                       </div>
                       <div className="aspect-auto w-fit overflow-hidden rounded-lg">
                         <img
                           src={blog.bgimg}
-                          className="w-full rounded-lg p-0 transition-transform duration-700 ease-soft-spring group-hover:scale-110 md:min-h-[20rem] xl:h-full"
+                          className="min-h-[20rem] w-full rounded-lg p-0 transition-transform duration-700 ease-soft-spring group-hover:scale-110 xl:h-full"
+                          alt=""
                         ></img>
                       </div>
                       <Link to={blog.to}>
-                        <button className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center gap-2 rounded-lg bg-black/30 py-4 text-lg backdrop-blur-sm transition-colors duration-250 ease-in-out hover:text-blue-200">
+                        <button className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center gap-2 rounded-lg rounded-t-none bg-black/30 py-4 text-lg backdrop-blur-sm transition-colors duration-250 ease-in-out hover:text-blue-200">
                           Read More{" "}
                           <span>
                             <IconArrowRight strokeWidth={2}></IconArrowRight>

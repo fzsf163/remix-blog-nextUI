@@ -86,7 +86,7 @@ const ThemeSwitch = (props: SwitchProps) => {
           <div
             {...getWrapperProps({
               style: {
-                //   backgroundColor: theme === "light" ? "gray":"wheat",
+                  // backgroundColor: theme === "light" ? "gray":"wheat",
               },
             })}
             className={slots.wrapper({

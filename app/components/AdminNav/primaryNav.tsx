@@ -1,21 +1,20 @@
-import { Form } from "@remix-run/react";
-import ThemeToggler from "../themeSwitch";
-import { IconLogout } from "@tabler/icons-react";
 import { Tooltip } from "@nextui-org/react";
-import SecondaryNav from "./secondaryNav";
+import { Form } from "@remix-run/react";
+import { IconLogout } from "@tabler/icons-react";
+import ThemeToggler from "../themeSwitch";
+import Sidenav from "./sidenav";
 export default function PrimaryNav() {
   return (
-    <div className="sticky top-0 flex h-[4rem] items-center justify-center gap-4 bg-white/30 dark:bg-neutral-600/10  backdrop-blur-sm z-50">
+    <div className="sticky top-0 flex h-[4rem] items-center justify-around gap-4 bg-white/30 dark:bg-neutral-600/10  backdrop-blur-sm z-50">
       <div>
-        <SecondaryNav></SecondaryNav>
+        <Sidenav></Sidenav>
       </div>
       <h1
-        className="bg-gradient-to-r from-blue-400 via-green-500 to-purple-400 bg-clip-text text-2xl font-bold text-transparent"
-        style={{ fontFamily: "K2D" }}
+        className="text-slate-600 dark:text-slate-200 sm:text-2xl font-bold "
       >
         Admin Panel
       </h1>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center gap-4">
         <ThemeToggler></ThemeToggler>
         <Form method="POST" action="/admin" reloadDocument>
           <Tooltip content="Logout">

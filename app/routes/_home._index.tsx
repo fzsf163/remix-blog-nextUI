@@ -1,13 +1,18 @@
-import type { MetaFunction } from "@remix-run/node";
-import EmblaCarousel from "~/components/slider/carousel";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
 import { EmblaOptionsType } from "embla-carousel";
-import Social from "~/components/social-counter/social";
-import MotivationalText from "~/components/motivation-text/motive";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Categories from "~/components/catagories/categories";
 import FeaturedArticle from "~/components/feature-article/feature-article";
 import MeetAuthor from "~/components/meet-author/meet-author";
-import TrendingPost from "~/components/trending-posts/trending-post";
-import Categories from "~/components/catagories/categories";
+import MotivationalText from "~/components/motivation-text/motive";
+import EmblaCarousel from "~/components/slider/carousel";
+import Social from "~/components/social-counter/social";
 import SubscribeBox from "~/components/subscribe/subscribe";
+import TrendingPost from "~/components/trending-posts/trending-post";
+import { db } from "~/utils/db.server";
+import { readingDir } from "~/utils/readfile";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -45,7 +50,7 @@ const slider_images = [
       "Timothy Jonesvillage operation saw stronger easily cry idea everyone rubber further tide silent airplane fur vowel tone push laugh thousand dance cast mind claws hour",
   },
   {
-    img: "/public/slider-images/5.jpg",
+    img: "slider-images/5.jpg",
     header: "Bloom your mind in the womb of nature",
     mainTag: "Nature",
     description:
@@ -53,8 +58,51 @@ const slider_images = [
   },
 ];
 
+export async function action({ request }: ActionFunctionArgs) {
+  const formdata = await request.formData();
+  const subs = formdata.get("emailHomePageSub");
+
+  if (subs) {
+    try {
+      await db.subscribers.upsert({
+        create: {
+          email: subs as string,
+          recieveEmail: true,
+        },
+        update: {
+          email: subs as string,
+          recieveEmail: true,
+        },
+        where: {
+          email: subs as string,
+        },
+      });
+
+      return { success: "Subscribtion added, Thank You!!😚" };
+    } catch (error) {
+      return { error: "Something wrong happended, Please try again later" };
+    }
+  }
+  return null;
+}
+
+type actionProps = {
+  success: string | null | undefined;
+  error: string | null | undefined;
+};
 export default function Index() {
   const OPTIONS: EmblaOptionsType = { loop: true, containScroll: false };
+  const actiondata = useActionData<typeof action>();
+  const subsUpdate = actiondata as actionProps;
+  useEffect(() => {
+    if (actiondata === undefined) return;
+    if (subsUpdate?.success) {
+      toast.success(subsUpdate.success);
+    }
+    if (subsUpdate?.error) {
+      toast.error(subsUpdate.error);
+    }
+  }, [subsUpdate]);
   return (
     <div className="max-w-screen-3xl m-auto my-5 space-y-8">
       <EmblaCarousel slides={slider_images} options={OPTIONS}></EmblaCarousel>

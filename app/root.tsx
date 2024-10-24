@@ -1,35 +1,26 @@
+import { NextUIProvider } from "@nextui-org/react";
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
-  useLocation,
   useNavigate,
+  useRouteError,
 } from "@remix-run/react";
-import "./tailwind.css";
 import "react-toastify/dist/ReactToastify.css";
-import { NextUIProvider } from "@nextui-org/react";
-import clsx from "clsx";
-import {
-  PreventFlashOnWrongTheme,
-  ThemeProvider,
-  useTheme,
-} from "remix-themes";
-import { themeSessionResolver } from "./sessionstheme.server";
-import { LoaderFunctionArgs } from "@remix-run/node";
+import "./tailwind.css";
+
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-import NavTop from "./components/navtop";
 import ToTop from "./utils/scrolltotop";
-import Footer from "./components/footer/footer";
+
 import { ToastContainer } from "react-toastify";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-  const path = useLocation();
-  let route = path.pathname;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -41,20 +32,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <NextUIProvider navigate={navigate}>
           <NextThemesProvider attribute="class" defaultTheme="light">
-            {/* {(route === "/" ||
-              route === "/about" ||
-              route === "/blogs" ||
-              route === "/request") && <NavTop></NavTop>} */}
             {children}
-            {/* {(route === "/" ||
-              route === "/about" ||
-              route === "/blogs" ||
-              route === "/request") && <Footer></Footer>} */}
-
-            <ToTop></ToTop>
           </NextThemesProvider>
         </NextUIProvider>
-        <ScrollRestoration />
+        <ScrollRestoration
+          getKey={(location) => {
+            // default behavior
+            return location.key;
+          }}
+        />
         <Scripts />
       </body>
     </html>
@@ -65,7 +51,52 @@ export default function App() {
   return (
     <div>
       <Outlet />
-      <ToastContainer theme="dark" bodyClassName={"font-bold"} style={{fontFamily:"K2D"}} />
+      <ToTop></ToTop>
+      <ToastContainer
+        theme="dark"
+        bodyClassName={"font-bold"}
+        style={{ fontFamily: "K2D,sans-serif" }}
+      />
     </div>
   );
+}
+
+// the mighty error boundary
+export function ErrorBoundary({ e }: { e: Error }) {
+  const error = useRouteError();
+  const refError = ReferenceError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div className="text-2xl font-bold">
+        <p>RootMan Found Error</p>
+        {error.data} <br /> {error.status} <br /> {error.statusText}
+      </div>
+    );
+  }
+  if (refError) {
+    return (
+      <div
+        style={{
+          padding: "20px",
+          backgroundColor: "red",
+          color: "white",
+        }}
+        className="text-white"
+      >
+        error ohno!!!
+        <p className="text-xl font-bold">{refError.name}</p>
+        <hr />
+        <br />
+        {refError.stack}
+        {refError.message}
+        {refError.cause as string}
+      </div>
+    );
+  }
+  if (e) {
+    return <div>{e.name}</div>;
+  }
+
+  return <div>Better Call Saul</div>;
 }

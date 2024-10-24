@@ -7,9 +7,13 @@
 @tailwind utilities;
 
 /* for all */
-html {
+html,
+body {
   scroll-behavior: smooth;
 }
+/* * {
+  min-width: 0px;
+} */
 body {
   font-family:
     "Inter",

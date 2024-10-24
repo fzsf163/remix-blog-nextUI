@@ -1,15 +1,15 @@
 // app/services/auth.server.ts
-import { Authenticator, AuthorizationError } from "remix-auth";
-import { destroySession, sessionStorage } from "~/utils/session.server";
-import { FormStrategy } from "remix-auth-form";
-import FindOrCreateUser from "./login";
 import argon2 from "argon2";
+import { Authenticator, AuthorizationError } from "remix-auth";
+import { FormStrategy } from "remix-auth-form";
+import { sessionStorage } from "~/utils/session.server";
+import FindOrCreateUser from "./login";
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
 export type User = {
   userID: string;
 };
-export let authenticator = new Authenticator<User | null>(sessionStorage, {
+export const authenticator = new Authenticator<User | null>(sessionStorage, {
   sessionKey: "sessionKey",
   sessionErrorKey: "sessionErrorKey",
 });
@@ -17,8 +17,8 @@ export let authenticator = new Authenticator<User | null>(sessionStorage, {
 // Tell the Authenticator to use the form strategy
 authenticator.use(
   new FormStrategy(async ({ form }) => {
-    let email = form.get("email") as string;
-    let password = form.get("password") as string;
+    const email = form.get("email") as string;
+    const password = form.get("password") as string;
 
     // let user = await login(email, password);
     let user = null;
@@ -36,7 +36,7 @@ authenticator.use(
       return value;
     });
 
-    let getUser = await FindOrCreateUser(email, hashPass);
+    const getUser = await FindOrCreateUser(email, hashPass);
 
     const verify = await argon2
       .verify(getUser.password, password)
@@ -45,7 +45,7 @@ authenticator.use(
       });
 
     if (verify === true) {
-      let id = getUser?.userID;
+      const id = getUser?.userID;
       user = { userID: id };
     } else {
       throw new AuthorizationError("Bad Credentials");

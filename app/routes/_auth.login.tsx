@@ -1,9 +1,8 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { AuthorizationError } from "remix-auth";
-import { ClientOnly } from "remix-utils/client-only";
 import LoginForm from "~/components/AdminLoginForm/loginForm";
 import { authenticator } from "~/utils/auth.server";
 import { sessionStorage } from "~/utils/session.server";
@@ -44,7 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
   // request object, optionally we pass an object with the URLs we want the user
   // to be redirected to after a success or a failure
   try {
-    const auth = await authenticator.authenticate("user-pass", request, {
+    await authenticator.authenticate("user-pass", request, {
       successRedirect: "/dashboard",
       // failureRedirect: "/login",
       throwOnError: true,

@@ -9,6 +9,8 @@ export default function RequestForm() {
           className="input-field"
           type="text"
           id="inputName"
+          name="name"
+          required
         />
         <label htmlFor="inputName" className="input-label peer capitalize">
           What Should We Call you
@@ -21,6 +23,8 @@ export default function RequestForm() {
           className="input-field"
           type="email"
           id="inputEmail"
+          name="email"
+          required
         />
         <label htmlFor="inputEmail" className="input-label peer capitalize">
           How do we reach you?
@@ -32,6 +36,8 @@ export default function RequestForm() {
           placeholder="Enter your request"
           className="input-field h-[10rem] resize-none"
           id="inputRequest"
+          name="requestDetails"
+          required
         />
         <label htmlFor="inputRequest" className="input-label peer capitalize">
           tell us what you would like to read

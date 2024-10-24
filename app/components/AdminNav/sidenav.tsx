@@ -1,19 +1,17 @@
-import { useRef, useState } from "react";
-import "./navtop.css";
 import { NavLink } from "@remix-run/react";
-import { IconApiApp } from "@tabler/icons-react";
-import ThemeToggler from "./themeSwitch";
-
 import { AnimatePresence, motion } from "framer-motion";
-import NavItems from "./mainNav";
+import { useRef, useState } from "react";
+import "./menubtn.css";
+// import "../navtop.css"
 
-const links = [
-  { name: "Home", to: "/", id: 1 },
-  { name: "Blogs", to: "blogs", id: 2 },
-  { name: "About", to: "about", id: 3 },
-  { name: "Request", to: "request", id: 4 },
+const routes = [
+  { label: "dashboard", to: "/dashboard" },
+  { label: "home ", to: "/homeOptions" },
+  { label: "about ", to: "/aboutOptions" },
+  { label: "request ", to: "/requestOptions" },
+  { label: "create blog", to: "/createBlog" },
+  { label: "settings", to: "/settings" },
 ];
-
 const itemVariants = {
   closed: {
     opacity: 0,
@@ -24,27 +22,21 @@ const itemVariants = {
 const sideVariants = {
   closed: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: -1,
     },
   },
   open: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: 1,
     },
   },
 };
 
-export default function NavTop() {
-  // const markerRef = useRef<HTMLDivElement>(null);
+export default function Sidenav() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [opened, setOpend] = useState(false);
-  // function indicator(e: any) {
-  //   if (markerRef.current == null) return;
-  //   markerRef.current.style.left = e.offsetLeft + "px";
-  //   markerRef.current.style.width = e.offsetWidth + "px";
-  // }
   function changeOpen() {
     if (buttonRef.current == null) return;
     if (opened === false) {
@@ -56,10 +48,12 @@ export default function NavTop() {
       setOpend(false);
     }
   }
-
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between p-2 backdrop-blur-sm light light:bg-gradient-to-r light:from-white/20 light:via-white/40 light:to-white/20 dark:bg-gradient-to-r dark:from-black/20 dark:via-black/40 dark:to-black/20 md:justify-evenly">
-      <div className="md:hidden">
+    <div>
+      <div
+        className="relative flex flex-col items-center justify-center"
+        style={{ fontFamily: "K2D" }}
+      >
         <button
           className="menu"
           aria-label="Side Menu"
@@ -79,24 +73,7 @@ export default function NavTop() {
           </svg>
         </button>
       </div>
-      <div className="flex items-center justify-center">
-        <h1>
-          <IconApiApp
-            stroke={2}
-            className="light light:text-black dark:text-green-100"
-          ></IconApiApp>
-        </h1>
-        <p className="font-bold light light:text-black dark:text-green-100">
-          RB
-        </p>
-      </div>
-      <NavItems></NavItems>
-      {/* mobile nav */}
-      <div>
-        <ThemeToggler></ThemeToggler>
-      </div>
-      {/* sidenav mobile */}
-      <div className="absolute left-0 top-16 flex md:hidden">
+      <div className="absolute left-0 top-16 flex">
         <AnimatePresence>
           {opened && (
             <motion.aside
@@ -116,19 +93,23 @@ export default function NavTop() {
                 exit="closed"
                 variants={sideVariants}
               >
-                {links.map(({ name, to, id }) => (
+                {routes.map(({ label, to }) => (
                   <motion.div
-                    key={id}
-                    whileHover={{ scale: 1.1 }}
+                    key={label}
+                    whileHover={{
+                      scale: 1.1,
+                    }}
                     variants={itemVariants}
                     className="sideMenuLink"
                   >
                     <NavLink
                       to={to}
                       onClick={changeOpen}
-                      className={"active:text-white"}
+                      className={
+                        "capitalize transition-all duration-300 ease-in-out hover:translate-x-[50px] hover:text-purple-100"
+                      }
                     >
-                      {name}
+                      {label}
                     </NavLink>
                   </motion.div>
                 ))}
