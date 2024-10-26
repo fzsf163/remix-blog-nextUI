@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "~/utils/db.server";
 import { requireUserSession } from "~/utils/session.server";
+
 export async function action({ request }: ActionFunctionArgs) {
   const session = await requireUserSession(request);
   const userID = session?.data?.sessionKey?.userID;
@@ -37,6 +38,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return null;
 }
+
 export default function AboutOptions() {
   const actiondata = useActionData<typeof action>();
   const [imgUrl, setImgUrl] = useState<string>("");
