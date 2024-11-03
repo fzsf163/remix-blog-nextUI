@@ -14,7 +14,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       readCount: true,
     },
   });
-  console.log("🚀 ~ loader ~ viewsCount:", viewsCount);
   const shareCount = 3000;
   return { postCount, commentsCount, viewsCount, shareCount };
 };
