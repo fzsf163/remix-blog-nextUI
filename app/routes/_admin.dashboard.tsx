@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import CustomCells from "~/components/poststable/custiomcell";
+import { TablePropsTypes } from "~/components/poststable/types";
 import StatCard from "~/components/statCard/statCard";
 import { db } from "~/utils/db.server";
 import { requireUserSession } from "~/utils/session.server";
@@ -10,6 +11,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const postCount = await db.post.count();
   const commentsCount = await db.comments.count();
   const viewsCount = await db.post.findMany({
+    select: {
+      readCount: true,
+    },
+  });
+  const tablePosts = await db.post.findMany({
     select: {
       title: true,
       author: {
@@ -21,18 +27,29 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       createdAt: true,
       published: true,
       updatedAt: true,
-      readCount: true,
+      id: true,
     },
   });
   const shareCount = 3000;
-  return { postCount, commentsCount, viewsCount, shareCount };
+  return { postCount, commentsCount, viewsCount, shareCount, tablePosts };
 };
-
 export default function Dashboard() {
   // const userID = useOutletContext();
-  const { commentsCount, postCount, shareCount, viewsCount } =
+  const { commentsCount, postCount, shareCount, viewsCount, tablePosts } =
     useLoaderData<typeof loader>();
-  console.log("🚀 ~ Dashboard ~ viewsCount:", viewsCount);
+  const tablePostData: TablePropsTypes[] = tablePosts.map((post) => ({
+    id: post.id,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+    title: post.title,
+    published: post.published, // This will work as boolean is acceptable in the type
+    thumbnail: post.thumbnail,
+    author: post.author.name, // Extract just the name from the author object
+  }));
+  console.log(
+    "🚀 ~ consttablePostData:TablePropsTypes[]=tablePosts.map ~ tablePostData:",
+    tablePostData,
+  );
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
   const sumOfViewCounts = viewsCount.reduce((a, b) => {
     const n = b.readCount!;
@@ -66,7 +83,7 @@ export default function Dashboard() {
       <div>
         <h1 className="text-4xl font-bold">Posts</h1>
         <br />
-        <CustomCells></CustomCells>
+        <CustomCells posts={tablePostData}></CustomCells>
       </div>
     </div>
   );
