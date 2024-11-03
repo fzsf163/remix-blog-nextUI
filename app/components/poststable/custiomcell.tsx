@@ -60,7 +60,6 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
   );
 
   const onSearchChange = React.useCallback((value?: string) => {
-    console.log("🚀 ~ onSearchChange ~ value:", value);
     if (value) {
       setFilterValue(value);
       setPage(1);
@@ -187,7 +186,7 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
                 <span
                   className="cursor-pointer text-lg text-default-400 active:opacity-50"
-                  onClick={() => console.log(posts.id, cellValue)}
+                  onClick={() => console.log(posts.id)}
                 >
                   <EyeIcon />
                 </span>

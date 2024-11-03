@@ -48,10 +48,6 @@ export default function Dashboard() {
     thumbnail: post.thumbnail,
     author: post.author.name, // Extract just the name from the author object
   }));
-  console.log(
-    "🚀 ~ consttablePostData:TablePropsTypes[]=tablePosts.map ~ tablePostData:",
-    tablePostData,
-  );
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
   const sumOfViewCounts = viewsCount.reduce((a, b) => {
     const n = b.readCount!;
