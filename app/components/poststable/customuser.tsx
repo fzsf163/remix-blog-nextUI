@@ -1,7 +1,7 @@
 import { TablePropsTypes } from "./types";
 
 interface Column {
-  uid: keyof TablePropsTypes;
+  uid: keyof TablePropsTypes | "actions";
   name: string;
   id: string;
 }
@@ -35,6 +35,11 @@ const columns: Column[] = [
   {
     uid: "updatedAt",
     name: "Update Time",
+    id: crypto.randomUUID(),
+  },
+  {
+    uid: "actions",
+    name: "Actions",
     id: crypto.randomUUID(),
   },
 ];

@@ -21,15 +21,14 @@ import { SearchIcon } from "./searchIcon";
 import { TablePropsTypes } from "./types";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  true: "success",
+  false: "warning",
 };
 
 export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
   const [page, setPage] = React.useState(1);
   const [filterValue, setFilterValue] = React.useState("");
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const hasSearchFilter = Boolean(filterValue);
   // console.log("🚀 ~ CustomCells ~ hasSearchFilter:", hasSearchFilter);
 
@@ -52,6 +51,14 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
     return filteredUsers;
   }, [filterValue, hasSearchFilter, posts]);
 
+  const onRowsPerPageChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRowsPerPage(Number(e.target.value));
+      setPage(1);
+    },
+    [],
+  );
+
   const onSearchChange = React.useCallback((value?: string) => {
     console.log("🚀 ~ onSearchChange ~ value:", value);
     if (value) {
@@ -67,7 +74,6 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
     setPage(1);
   }, []);
 
-  const rowsPerPage = 6;
   // const pages = Math.ceil(users.length / rowsPerPage);
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -77,7 +83,7 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
 
     // return users.slice(start, end);
     return filteredItems.slice(start, end);
-  }, [page, filteredItems]);
+  }, [page, rowsPerPage, filteredItems]);
 
   const topContent = React.useMemo(() => {
     return (
@@ -93,6 +99,37 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
       ></Input>
     );
   }, [filterValue, onSearchChange, onClear]);
+  const bottomContent = React.useMemo(() => {
+    return (
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center justify-between gap-12">
+          <span className="text-small text-default-400">
+            Total {posts.length} posts
+          </span>
+          <label className="flex items-center text-small text-default-800">
+            Rows per page
+            <select
+              className="m-2 rounded bg-transparent px-1 py-2 text-small text-default-600 shadow outline-none"
+              onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+        <Pagination
+          isCompact
+          showControls
+          showShadow
+          color="secondary"
+          page={page}
+          total={pages}
+          onChange={(page) => setPage(page)}
+        />
+      </div>
+    );
+  }, [posts.length, onRowsPerPageChange, page, pages]);
 
   const renderCell = React.useCallback(
     (posts: TablePropsTypes, columnKey: React.Key) => {
@@ -108,15 +145,17 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
             //     {user.email}
             //   </User>
             <div>
-              <h1 className="font-bold capitalize">{posts.title}</h1>
+              <h1 className="font-semibold capitalize">{posts.title}</h1>
             </div>
           );
         case "author":
           return (
             <div className="flex flex-col">
-              <p className="text-bold text-sm capitalize">{cellValue}</p>
-              <p className="text-bold text-sm capitalize text-default-400">
+              <p className="text-base font-bold capitalize text-default-800">
                 {posts.author}
+              </p>
+              <p className="text-bold text-sm lowercase text-default-400">
+                {posts.email}
               </p>
             </div>
           );
@@ -124,15 +163,23 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
           return (
             <Chip
               className="capitalize"
-              color={statusColorMap[posts.published ? "Published" : "Draft"]}
+              color={
+                statusColorMap[posts.published === true ? "true" : "false"]
+              }
               size="sm"
-              variant="flat"
+              variant="shadow"
             >
-              {cellValue === true ? "Published" : "Draft"}
+              <span className="text-white">
+                {cellValue === true ? "PUBLISHED" : "DRAFT"}
+              </span>
             </Chip>
           );
         case "thumbnail":
-          return <img src={String(cellValue)} alt=""></img>;
+          return (
+            <div>
+              <img src={String(cellValue)} alt=""></img>
+            </div>
+          );
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
@@ -140,17 +187,17 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
                 <span
                   className="cursor-pointer text-lg text-default-400 active:opacity-50"
-                  onClick={() => console.log(posts.title)}
+                  onClick={() => console.log(posts.id, cellValue)}
                 >
                   <EyeIcon />
                 </span>
               </Tooltip>
-              <Tooltip content="Edit user">
+              <Tooltip content="Edit post">
                 <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
                   <EditIcon />
                 </span>
               </Tooltip>
-              <Tooltip color="danger" content="Delete user">
+              <Tooltip color="danger" content="Delete post">
                 <span className="cursor-pointer text-lg text-danger active:opacity-50">
                   <DeleteIcon />
                 </span>
@@ -171,26 +218,14 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
         th: "bg-slate-200 shadow-sm",
       }}
       aria-label="posts"
-      bottomContent={
-        <div className="flex w-full justify-center">
-          <Pagination
-            isCompact
-            showControls
-            showShadow
-            color="secondary"
-            page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
-          />
-        </div>
-      }
+      bottomContent={bottomContent}
       topContent={topContent}
     >
       <TableHeader columns={columns} className="bg-blue-300">
         {(column) => (
           <TableColumn
             key={column.uid}
-            // align={column.uid === "actions" ? "end" : "start"}
+            align={column.name === "actions" ? "end" : "start"}
           >
             {column.name}
           </TableColumn>

@@ -12,6 +12,12 @@ export interface TablePropsTypes {
   thumbnail: string;
   author: string | null;
   id: string | null;
+  email: string | null;
+  // actions?: {
+  //   view: (id: string) => void;
+  //   delete: (id: string) => void;
+  //   edit: (id: string) => void;
+  // };
 }
 
 export interface POSTSTYPES {

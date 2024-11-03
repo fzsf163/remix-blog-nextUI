@@ -21,6 +21,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       author: {
         select: {
           name: true,
+          email: true,
         },
       },
       thumbnail: true,
@@ -39,6 +40,7 @@ export default function Dashboard() {
     useLoaderData<typeof loader>();
   const tablePostData: TablePropsTypes[] = tablePosts.map((post) => ({
     id: post.id,
+    email: post.author.email,
     createdAt: post.createdAt,
     updatedAt: post.updatedAt,
     title: post.title,
