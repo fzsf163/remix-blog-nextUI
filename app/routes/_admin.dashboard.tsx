@@ -11,6 +11,16 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const commentsCount = await db.comments.count();
   const viewsCount = await db.post.findMany({
     select: {
+      title: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
+      thumbnail: true,
+      createdAt: true,
+      published: true,
+      updatedAt: true,
       readCount: true,
     },
   });
@@ -22,6 +32,7 @@ export default function Dashboard() {
   // const userID = useOutletContext();
   const { commentsCount, postCount, shareCount, viewsCount } =
     useLoaderData<typeof loader>();
+  console.log("🚀 ~ Dashboard ~ viewsCount:", viewsCount);
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
   const sumOfViewCounts = viewsCount.reduce((a, b) => {
     const n = b.readCount!;
