@@ -1,12 +1,6 @@
 import {
-  Button,
   Chip,
   ChipProps,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  getKeyValue,
   Input,
   Pagination,
   Table,
@@ -16,47 +10,35 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
-  User,
 } from "@nextui-org/react";
 import React from "react";
 import { DeleteIcon } from "./DeleteIcon";
 import { EditIcon } from "./EditIcon";
 import { EyeIcon } from "./EyeIcon";
 import "./customcell.css";
-import { columns, users } from "./customuser";
-import { ChevronDownIcon } from "./downIcon";
+import { columns } from "./customuser";
 import { SearchIcon } from "./searchIcon";
-import { capitalize } from "./utls";
+import { TablePropsTypes } from "./types";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  true: "success",
+  false: "warning",
 };
 
-type User = (typeof users)[0];
-const statusOptions = [
-  { name: "Active", uid: "active" },
-  { name: "Paused", uid: "paused" },
-  { name: "Vacation", uid: "vacation" },
-];
-
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
-
-export default function CustomCells() {
+export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
   const [page, setPage] = React.useState(1);
   const [filterValue, setFilterValue] = React.useState("");
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const hasSearchFilter = Boolean(filterValue);
   // console.log("🚀 ~ CustomCells ~ hasSearchFilter:", hasSearchFilter);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredUsers = [...posts];
     // console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase()),
+        user.title.toLowerCase().includes(filterValue.toLowerCase()),
       );
       // console.log("🚀 ~ filteredItems ~ filteredUsers:", filteredUsers);
     }
@@ -67,10 +49,17 @@ export default function CustomCells() {
     // }
 
     return filteredUsers;
-  }, [filterValue, hasSearchFilter]);
+  }, [filterValue, hasSearchFilter, posts]);
+
+  const onRowsPerPageChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRowsPerPage(Number(e.target.value));
+      setPage(1);
+    },
+    [],
+  );
 
   const onSearchChange = React.useCallback((value?: string) => {
-    console.log("🚀 ~ onSearchChange ~ value:", value);
     if (value) {
       setFilterValue(value);
       setPage(1);
@@ -84,7 +73,6 @@ export default function CustomCells() {
     setPage(1);
   }, []);
 
-  const rowsPerPage = 6;
   // const pages = Math.ceil(users.length / rowsPerPage);
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -94,7 +82,7 @@ export default function CustomCells() {
 
     // return users.slice(start, end);
     return filteredItems.slice(start, end);
-  }, [page, filteredItems]);
+  }, [page, rowsPerPage, filteredItems]);
 
   const topContent = React.useMemo(() => {
     return (
@@ -110,72 +98,117 @@ export default function CustomCells() {
       ></Input>
     );
   }, [filterValue, onSearchChange, onClear]);
+  const bottomContent = React.useMemo(() => {
+    return (
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center justify-between gap-12">
+          <span className="text-small text-default-400">
+            Total {posts.length} posts
+          </span>
+          <label className="flex items-center text-small text-default-800">
+            Rows per page
+            <select
+              className="m-2 rounded bg-transparent px-1 py-2 text-small text-default-600 shadow outline-none"
+              onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+        <Pagination
+          isCompact
+          showControls
+          showShadow
+          color="secondary"
+          page={page}
+          total={pages}
+          onChange={(page) => setPage(page)}
+        />
+      </div>
+    );
+  }, [posts.length, onRowsPerPageChange, page, pages]);
 
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-
-    switch (columnKey) {
-      case "name":
-        return (
-          //   <User
-          //     avatarProps={{ radius: "lg", src: user.avatar }}
-          //     description={user.email}
-          //     name={cellValue}
-          //   >
-          //     {user.email}
-          //   </User>
-          <div>
-            <h1 className="font-bold capitalize">{user.email}</h1>
-          </div>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-              <span
-                className="cursor-pointer text-lg text-default-400 active:opacity-50"
-                onClick={() => console.log(user.id)}
-              >
-                <EyeIcon />
+  const renderCell = React.useCallback(
+    (posts: TablePropsTypes, columnKey: React.Key) => {
+      const cellValue = posts[columnKey as keyof TablePropsTypes];
+      switch (columnKey) {
+        case "title":
+          return (
+            //   <User
+            //     avatarProps={{ radius: "lg", src: user.avatar }}
+            //     description={user.email}
+            //     name={cellValue}
+            //   >
+            //     {user.email}
+            //   </User>
+            <div>
+              <h1 className="font-semibold capitalize">{posts.title}</h1>
+            </div>
+          );
+        case "author":
+          return (
+            <div className="flex flex-col">
+              <p className="text-base font-bold capitalize text-default-800">
+                {posts.author}
+              </p>
+              <p className="text-bold text-sm lowercase text-default-400">
+                {posts.email}
+              </p>
+            </div>
+          );
+        case "published":
+          return (
+            <Chip
+              className="capitalize"
+              color={
+                statusColorMap[posts.published === true ? "true" : "false"]
+              }
+              size="sm"
+              variant="shadow"
+            >
+              <span className="text-white">
+                {cellValue === true ? "PUBLISHED" : "DRAFT"}
               </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+            </Chip>
+          );
+        case "thumbnail":
+          return (
+            <div>
+              <img src={String(cellValue)} alt=""></img>
+            </div>
+          );
+        case "actions":
+          return (
+            <div className="relative flex items-center gap-2">
+              <Tooltip content="Details">
+                {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+                <span
+                  className="cursor-pointer text-lg text-default-400 active:opacity-50"
+                  onClick={() => console.log(posts.id)}
+                >
+                  <EyeIcon />
+                </span>
+              </Tooltip>
+              <Tooltip content="Edit post">
+                <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
+                  <EditIcon />
+                </span>
+              </Tooltip>
+              <Tooltip color="danger" content="Delete post">
+                <span className="cursor-pointer text-lg text-danger active:opacity-50">
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    [],
+  );
 
   return (
     <Table
@@ -184,26 +217,14 @@ export default function CustomCells() {
         th: "bg-slate-200 shadow-sm",
       }}
       aria-label="posts"
-      bottomContent={
-        <div className="flex w-full justify-center">
-          <Pagination
-            isCompact
-            showControls
-            showShadow
-            color="secondary"
-            page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
-          />
-        </div>
-      }
+      bottomContent={bottomContent}
       topContent={topContent}
     >
       <TableHeader columns={columns} className="bg-blue-300">
         {(column) => (
           <TableColumn
             key={column.uid}
-            // align={column.uid === "actions" ? "end" : "start"}
+            align={column.name === "actions" ? "end" : "start"}
           >
             {column.name}
           </TableColumn>
@@ -211,7 +232,7 @@ export default function CustomCells() {
       </TableHeader>
       <TableBody items={items ?? []} emptyContent="No Data to show">
         {(item) => (
-          <TableRow key={item?.id}>
+          <TableRow key={item.id}>
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
