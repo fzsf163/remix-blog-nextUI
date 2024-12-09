@@ -12,7 +12,6 @@ import Social from "~/components/social-counter/social";
 import SubscribeBox from "~/components/subscribe/subscribe";
 import TrendingPost from "~/components/trending-posts/trending-post";
 import { db } from "~/utils/db.server";
-import { readingDir } from "~/utils/readfile";
 export const meta: MetaFunction = () => {
   return [
     { title: "RB-Home" },
@@ -80,7 +79,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
       return { success: "Subscribtion added, Thank You!!😚" };
     } catch (error) {
-      return { error: "Something wrong happended, Please try again later" };
+      return {
+        error:
+          "Something wrong happended, Please try again later" + " " + error,
+      };
     }
   }
   return null;
@@ -102,7 +104,7 @@ export default function Index() {
     if (subsUpdate?.error) {
       toast.error(subsUpdate.error);
     }
-  }, [subsUpdate]);
+  }, [actiondata, subsUpdate]);
   return (
     <div className="max-w-screen-3xl m-auto my-5 space-y-8">
       <EmblaCarousel slides={slider_images} options={OPTIONS}></EmblaCarousel>
