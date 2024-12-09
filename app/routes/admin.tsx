@@ -33,6 +33,4 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   } else {
     return redirect("/");
   }
-
-  return userID;
 };
