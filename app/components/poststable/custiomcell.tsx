@@ -136,13 +136,6 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
       switch (columnKey) {
         case "title":
           return (
-            //   <User
-            //     avatarProps={{ radius: "lg", src: user.avatar }}
-            //     description={user.email}
-            //     name={cellValue}
-            //   >
-            //     {user.email}
-            //   </User>
             <div>
               <h1 className="font-semibold capitalize">{posts.title}</h1>
             </div>

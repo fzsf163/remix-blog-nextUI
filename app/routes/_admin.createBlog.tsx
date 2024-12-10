@@ -1,5 +1,4 @@
 import { Block } from "@blocknote/core";
-// import { ServerBlockNoteEditor } from "@blocknote/server-util";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/core/style.css";
 import {
