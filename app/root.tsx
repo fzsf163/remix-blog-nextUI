@@ -51,7 +51,7 @@ export default function App() {
   return (
     <div>
       <Outlet />
-      <ToTop></ToTop>
+      <ToTop />
       <ToastContainer
         theme="dark"
         bodyClassName={"font-bold"}
